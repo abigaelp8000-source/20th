@@ -30,7 +30,7 @@ html, body {
 }
 
 /* ── SCREENS ── */
-.screen {
+.screen-disabled {
   position: fixed;
   inset: 0;
   display: flex;
@@ -41,16 +41,6 @@ html, body {
   pointer-events: none;
   transition: opacity 0.9s ease;
   z-index: 10;
-}
-.screen.active {
-  opacity: 1;
-  pointer-events: all;
-}
-.screen.dark {
-  background: var(--charcoal);
-}
-.screen.hidden {
-  display: none;
 }
 
 .overlay {
