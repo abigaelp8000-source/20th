@@ -268,6 +268,7 @@
         <div class="env-sig">Love, Abby ❤️</div>
         <div class="env-divider"></div>
         <div class="env-actions">
+          <input id="guest-name-input" type="text" placeholder="Your name..." style="display:block;width:100%;max-width:280px;margin:0 auto 16px;padding:12px 16px;border:1px solid #EDE4D7;background:#FAF8F5;font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:300;color:#2C2C2C;text-align:center;outline:none" />
           <button class="btn-yes" onclick="confirmRSVP()">✨ &nbsp;I'm Coming</button>
           <button class="btn-no" onclick="declineRSVP()">❤️ &nbsp;I Can't Make It</button>
         </div>
@@ -305,6 +306,22 @@
     </div>
     <div id="confetti-container"></div>
   </div>
+
+  <!-- Hidden Netlify form declarations — required for Netlify to detect at deploy time -->
+  <form name="rsvp" netlify netlify-honeypot="bot-field" hidden>
+    <input type="text" name="guest-name" />
+    <input type="text" name="rsvp" />
+  </form>
+  <form name="guestbook" netlify netlify-honeypot="bot-field" hidden>
+    <input type="text" name="guest-name" />
+    <textarea name="message"></textarea>
+  </form>
+  <form name="playlist" netlify netlify-honeypot="bot-field" hidden>
+    <input type="text" name="guest-name" />
+    <input type="text" name="song" />
+    <input type="text" name="artist" />
+    <input type="text" name="why" />
+  </form>
 
   <script src="js/state.js"></script>
   <script src="js/main.js"></script>

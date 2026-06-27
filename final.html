@@ -264,6 +264,11 @@
       event.target.classList.add('active');
     }
 
+    function netlifySubmit(formName, data) {
+      const body = new URLSearchParams({ 'form-name': formName, ...data });
+      fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString() }).catch(() => {});
+    }
+
     function addSong() {
       const name   = document.getElementById('pl-name').value.trim();
       const song   = document.getElementById('pl-song').value.trim();
@@ -273,6 +278,7 @@
       const playlist = getVal('playlist', []);
       playlist.push({ name, song, artist, why, date: new Date().toISOString() });
       saveState({ playlist });
+      netlifySubmit('playlist', { 'guest-name': name, song, artist, why });
       ['pl-name','pl-song','pl-artist','pl-why'].forEach(id => document.getElementById(id).value = '');
       document.getElementById('pl-confirm').style.display = 'block';
       setTimeout(() => { document.getElementById('pl-confirm').style.display = 'none'; }, 4000);
@@ -306,6 +312,7 @@
       const entries = getVal('guestbook', []);
       entries.push({ name, message, date: new Date().toISOString() });
       saveState({ guestbook: entries });
+      netlifySubmit('guestbook', { 'guest-name': name, message });
       document.getElementById('gb-name').value = '';
       document.getElementById('gb-message').value = '';
       document.getElementById('gb-confirm').style.display = 'block';
@@ -336,8 +343,6 @@
       renderPlaylist();
       renderGuestbook();
     });
-
-    }
   </script>
   <div id="yt-bg-player" style="position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;top:-999px"></div>
   <script src="https://www.youtube.com/iframe_api"></script>

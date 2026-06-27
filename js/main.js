@@ -146,9 +146,17 @@ function openEnvelope() {
   }, 900);
 }
 
+/* ── NETLIFY SUBMIT HELPER ── */
+function netlifySubmit(formName, data) {
+  const body = new URLSearchParams({ 'form-name': formName, ...data });
+  fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString() }).catch(() => {});
+}
+
 /* ── RSVP YES ── */
 function confirmRSVP() {
-  try { saveState({ rsvp: 'yes' }); } catch {}
+  const guestName = (document.getElementById('guest-name-input') || {}).value || '';
+  try { saveState({ rsvp: 'yes', guest_name: guestName }); } catch {}
+  netlifySubmit('rsvp', { 'guest-name': guestName, rsvp: 'yes' });
   fadeOut(S.invitation);
   fadeOut(S.title);
   setTimeout(() => { fadeIn(S.confirmed); launchConfetti(); }, 400);
