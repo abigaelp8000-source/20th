@@ -71,15 +71,6 @@
     }
     .w-btn:hover { background: var(--burgundy-l); }
     .w-btn:active { transform: scale(0.97); }
-    /* bottom music btn */
-    .music-btn {
-      position: fixed; bottom: 24px; right: 24px;
-      background: rgba(250,248,245,0.9); border: 1px solid #EDE4D7;
-      color: #6B1F3A; cursor: pointer; padding: 10px 14px;
-      font-family: 'Inter', sans-serif; font-size: 11px;
-      letter-spacing: 2px; z-index: 200; backdrop-filter: blur(4px);
-    }
-    .music-btn.playing { border-color: #D8B36A; color: #D8B36A; }
   </style>
 </head>
 <body>
@@ -101,14 +92,7 @@
       <a href="trip.html" class="w-btn">🌴 &nbsp;Trip Overview</a>
     </div>
   </div>
-
-  <button class="music-btn" id="music-btn" onclick="toggleMusic()">
-    <span id="music-label">🔇</span>
-  </button>
   <script>
   </script>
-  <div id="yt-bg-player" style="position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;top:-999px"></div>
-  <script src="https://www.youtube.com/iframe_api"></script>
-  <script src="js/music.js"></script>
 </body>
 </html>
