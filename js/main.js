@@ -157,6 +157,7 @@ function confirmRSVP() {
   const guestName = (document.getElementById('guest-name-input') || {}).value || '';
   try { saveState({ rsvp: 'yes', guest_name: guestName }); } catch {}
   netlifySubmit('rsvp', { 'guest-name': guestName, rsvp: 'yes' });
+  if (typeof startMusicAfterInteraction === 'function') startMusicAfterInteraction();
   fadeOut(S.invitation);
   fadeOut(S.title);
   setTimeout(() => { fadeIn(S.confirmed); launchConfetti(); }, 400);
