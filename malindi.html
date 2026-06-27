@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Malindi — Twenty in Paradise</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Allura&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+</head>
+<body class="page-body">
+
+  <nav class="page-nav">
+    <a href="dashboard.html" class="nav-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Back
+    </a>
+    <span class="nav-title" id="page-nav-title">Malindi</span>
+    <span class="nav-right"></span>
+  </nav>
+
+  <!-- STEP INDICATOR -->
+  <div class="step-indicator">
+    <div class="step-item active" id="si-0"><div class="step-dot"></div><span>Decision</span></div>
+    <div class="step-line"></div>
+    <div class="step-item" id="si-1"><div class="step-dot"></div><span>Guide</span></div>
+    <div class="step-line"></div>
+    <div class="step-item" id="si-2"><div class="step-dot"></div><span>Ramore</span></div>
+  </div>
+
+  <!-- ── STEP 0: DECISION ── -->
+  <div id="step-0">
+    <div class="page-hero">
+      <div class="page-hero-palm">🏡</div>
+      <p class="page-eyebrow">The Extension</p>
+      <h1 class="page-title">Malindi</h1>
+      <p class="page-script">will you be joining us?</p>
+      <div class="page-gold-bar"></div>
+    </div>
+    <div class="page-content">
+      <div class="note-box">
+        🌊 After Watamu, the adventure continues in Malindi — 1st to 9th August. More beaches, more nightlife, new experiences. The question is — are you in?
+      </div>
+      <div class="decision-wrap" style="padding:32px 0 64px">
+        <p class="decision-q">Will you be joining us in Malindi?</p>
+        <div class="decision-btns">
+          <button class="btn-decision yes" onclick="chooseMalindi(true)">🌴 &nbsp;Yes, I'm In!</button>
+          <button class="btn-decision no" onclick="chooseMalindi(false)">Skip to Budget</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── STEP 1: MALINDI GUIDE ── -->
+  <div id="step-1" style="display:none">
+    <div class="page-hero">
+      <div class="page-hero-palm">🌴</div>
+      <p class="page-eyebrow">1st – 9th August 2026</p>
+      <h1 class="page-title">Malindi Guide</h1>
+      <p class="page-script">a new chapter begins</p>
+      <div class="page-gold-bar"></div>
+    </div>
+    <div class="page-content wide">
+
+      <!-- ACCOMMODATION -->
+      <div class="section-block">
+        <div class="section-header">
+          <span class="section-icon">🏡</span>
+          <div><div class="section-label">Where We Stay</div><div class="section-heading">Malindi Accommodation</div></div>
+        </div>
+        <div class="info-list">
+          <div class="info-row"><span class="ir-label">Location</span><span class="ir-value">Malindi Town / Beachside</span></div>
+          <div class="info-row"><span class="ir-label">Dates</span><span class="ir-value">1st – 9th August · 8 nights</span></div>
+          <div class="info-row"><span class="ir-label">Catering</span><span class="ir-value">Self-catering (cooking most days)</span></div>
+        </div>
+        <p style="font-size:12px;color:var(--stone);margin-top:12px">Full accommodation details will be confirmed closer to the date.</p>
+      </div>
+
+      <!-- ACTIVITIES -->
+      <div class="section-block">
+        <div class="section-header">
+          <span class="section-icon">🌊</span>
+          <div><div class="section-label">Things to Do</div><div class="section-heading">Activities</div></div>
+        </div>
+        <div class="activities-grid" id="malindi-activities-grid"></div>
+      </div>
+
+      <!-- Suggest Activity -->
+      <div class="suggest-form" style="margin-bottom:48px">
+        <h4>💡 Suggest an Activity</h4>
+        <div class="form-field">
+          <label>Activity Name</label>
+          <input type="text" id="suggest-mal-activity-name" placeholder="e.g. Boat trip, snorkelling..." />
+        </div>
+        <div class="form-field">
+          <label>Details</label>
+          <input type="text" id="suggest-mal-activity-notes" placeholder="Price, location, anything useful..." />
+        </div>
+        <button class="form-submit" onclick="submitMalActivitySuggestion()">Submit Suggestion</button>
+        <div id="mal-activity-confirm" style="display:none;margin-top:12px;font-size:13px;color:var(--palm)">✓ Thanks! Suggestion saved.</div>
+      </div>
+
+      <!-- RESTAURANTS & CLUBS -->
+      <div class="section-block">
+        <div class="section-header">
+          <span class="section-icon">🍽️</span>
+          <div><div class="section-label">Eat & Go Out</div><div class="section-heading">Restaurants & Clubs</div></div>
+        </div>
+        <div class="note-box" style="margin-bottom:20px">🍳 We'll cook most days — these are the spots for nights out and special meals.</div>
+        <div class="venues-grid" id="malindi-venues-grid"></div>
+      </div>
+
+      <!-- Suggest Restaurant -->
+      <div class="suggest-form" style="margin-bottom:48px">
+        <h4>🍽️ Suggest a Place</h4>
+        <div class="form-field">
+          <label>Place Name</label>
+          <input type="text" id="suggest-mal-rest-name" placeholder="Restaurant, bar, club..." />
+        </div>
+        <div class="form-field">
+          <label>Notes</label>
+          <input type="text" id="suggest-mal-rest-notes" placeholder="Vibe, must-try, price range..." />
+        </div>
+        <button class="form-submit" onclick="submitMalRestSuggestion()">Submit Suggestion</button>
+        <div id="mal-rest-confirm" style="display:none;margin-top:12px;font-size:13px;color:var(--palm)">✓ Thanks! Suggestion saved.</div>
+      </div>
+
+      <!-- LOCAL TRANSPORT -->
+      <div class="section-block">
+        <div class="section-header">
+          <span class="section-icon">🛺</span>
+          <div><div class="section-label">Getting Around</div><div class="section-heading">Local Transport</div></div>
+        </div>
+        <div class="info-list">
+          <div class="info-row"><span class="ir-label">🛺 Tuk Tuk</span><span class="ir-value">KSh 100–400 · negotiate fare upfront</span></div>
+          <div class="info-row"><span class="ir-label">🏍️ Boda Boda</span><span class="ir-value">KSh 50–200 · quick for solo trips</span></div>
+          <div class="info-row"><span class="ir-label">🚕 Uber/Bolt</span><span class="ir-value">Available in Malindi town</span></div>
+          <div class="info-row"><span class="ir-label">🚐 Matatu</span><span class="ir-value">KSh 30–100 · Watamu ↔ Malindi route</span></div>
+        </div>
+      </div>
+
+      <!-- MAP -->
+      <div class="section-block">
+        <div class="section-header">
+          <span class="section-icon">🗺️</span>
+          <div><div class="section-label">Location</div><div class="section-heading">Malindi</div></div>
+        </div>
+        <iframe class="map-embed" style="height:320px" src="https://maps.google.com/maps?q=Malindi,Kenya&output=embed" loading="lazy" frameborder="0"></iframe>
+      </div>
+
+    </div>
+    <div class="cta-bar">
+      <button class="cta-btn-ghost" onclick="goStep(0)">← Back</button>
+      <button class="cta-btn" onclick="goStep(2)">Ramore Event →</button>
+    </div>
+  </div>
+
+  <!-- ── STEP 2: RAMORE ── -->
+  <div id="step-2" style="display:none">
+    <div class="page-hero">
+      <div class="page-hero-palm">🎉</div>
+      <p class="page-eyebrow">Special Event</p>
+      <h1 class="page-title">Ramore Event</h1>
+      <p class="page-script">will you be there?</p>
+      <div class="page-gold-bar"></div>
+    </div>
+    <div class="page-content">
+      <div class="note-box">
+        🎟️ The Ramore Event is a must-attend experience during our Malindi leg. If you'd like to join, you'll need to purchase a ticket through the official site.
+      </div>
+      <div class="decision-wrap" style="padding:24px 0 64px">
+        <p class="decision-q">Will you be joining us at the Ramore Event?</p>
+        <div class="decision-btns">
+          <button class="btn-decision yes" onclick="chooseRamore(true)">🎟️ &nbsp;Yes — Get Tickets</button>
+          <button class="btn-decision no" onclick="chooseRamore(false)">Maybe Later</button>
+        </div>
+        <div id="ramore-saved" style="display:none;margin-top:28px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--stone)">Response saved ✓</div>
+      </div>
+    </div>
+    <div class="cta-bar">
+      <button class="cta-btn-ghost" onclick="goStep(1)">← Back</button>
+      <a href="budget.html" class="cta-btn">View Budget →</a>
+    </div>
+  </div>
+
+  <button class="music-btn" id="music-btn" onclick="toggleMusic()">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+    <span id="music-label">🔇</span>
+  </button>
+  <audio id="bg-audio" loop><source src="assets/audio/waves.mp3" type="audio/mpeg"></audio>
+
+  <script src="js/state.js"></script>
+  <script>
+    const MAL_ACTIVITIES = [
+      { id:'hells-kitchen',    name:"Hell's Kitchen",       price:'KSh 200 entrance + KSh 500 guide', duration:'Half day', note:'Dramatic rock formation' },
+      { id:'mambrui',          name:'Mambrui',              price:'Transport only',                   duration:'Half day', note:'Scenic village & beach' },
+      { id:'inside-out',       name:'Massage at Inside Out', price:'Varies',                          duration:'1–2 hrs',  note:'Relaxation & wellness' },
+      { id:'sardinia-island',  name:'Sardinia Island Tour',  price:'Varies',                          duration:'Half/Full day', note:'Island excursion' },
+    ];
+
+    const MAL_VENUES = [
+      { emoji:'🍽️', name:'Kasa',                 type:'Restaurant' },
+      { emoji:'🍺', name:'Bar Bar',              type:'Bar & Lounge' },
+      { emoji:'🥩', name:'Billionaire Grill & Bar', type:'Grill Restaurant' },
+      { emoji:'🎵', name:'Lost',                 type:'Club & Bar' },
+      { emoji:'🌹', name:'Rosada',               type:'Restaurant & Bar' },
+    ];
+
+    let currentStep = 0;
+
+    function goStep(n) {
+      document.getElementById('step-' + currentStep).style.display = 'none';
+      document.getElementById('step-' + n).style.display = 'block';
+      currentStep = n;
+      ['si-0','si-1','si-2'].forEach((id, i) => {
+        const el = document.getElementById(id);
+        el.classList.toggle('active', i === n);
+        el.classList.toggle('done', i < n);
+      });
+      window.scrollTo(0, 0);
+    }
+
+    function chooseMalindi(yes) {
+      saveState({ malindi: yes });
+      if (yes) goStep(1);
+      else window.location.href = 'budget.html';
+    }
+
+    function chooseRamore(yes) {
+      saveState({ ramore: yes });
+      document.getElementById('ramore-saved').style.display = 'block';
+      if (yes) {
+        setTimeout(() => window.open('https://ramore.com', '_blank'), 400);
+      }
+    }
+
+    function buildMalindiActivities() {
+      const saved = getVal('malindi_activities', []);
+      const grid = document.getElementById('malindi-activities-grid');
+      MAL_ACTIVITIES.forEach(a => {
+        const div = document.createElement('div');
+        div.className = 'activity-card' + (saved.includes(a.id) ? ' selected' : '');
+        div.id = 'mac-' + a.id;
+        div.innerHTML = `
+          <div class="ac-check">✓</div>
+          <div class="ac-name">${a.name}</div>
+          <div class="ac-price">${a.price}</div>
+          <div class="ac-meta">⏱ ${a.duration}</div>
+          ${a.note ? `<div class="ac-note">${a.note}</div>` : ''}
+        `;
+        div.onclick = () => {
+          toggleArrayItem('malindi_activities', a.id);
+          div.classList.toggle('selected');
+        };
+        grid.appendChild(div);
+      });
+    }
+
+    function buildMalindiVenues() {
+      const grid = document.getElementById('malindi-venues-grid');
+      MAL_VENUES.forEach(v => {
+        const div = document.createElement('div');
+        div.className = 'venue-card';
+        div.innerHTML = `<div class="venue-emoji">${v.emoji}</div><div class="venue-name">${v.name}</div><div class="venue-type">${v.type}</div>`;
+        grid.appendChild(div);
+      });
+    }
+
+    function submitMalActivitySuggestion() {
+      const name  = document.getElementById('suggest-mal-activity-name').value.trim();
+      const notes = document.getElementById('suggest-mal-activity-notes').value.trim();
+      if (!name) return;
+      const s = getVal('activity_suggestions', []);
+      s.push({ name, notes, destination: 'Malindi', date: new Date().toISOString() });
+      saveState({ activity_suggestions: s });
+      document.getElementById('suggest-mal-activity-name').value = '';
+      document.getElementById('suggest-mal-activity-notes').value = '';
+      document.getElementById('mal-activity-confirm').style.display = 'block';
+      setTimeout(() => { document.getElementById('mal-activity-confirm').style.display = 'none'; }, 3000);
+    }
+
+    function submitMalRestSuggestion() {
+      const name  = document.getElementById('suggest-mal-rest-name').value.trim();
+      const notes = document.getElementById('suggest-mal-rest-notes').value.trim();
+      if (!name) return;
+      const s = getVal('restaurant_suggestions', []);
+      s.push({ name, notes, destination: 'Malindi', date: new Date().toISOString() });
+      saveState({ restaurant_suggestions: s });
+      document.getElementById('suggest-mal-rest-name').value = '';
+      document.getElementById('suggest-mal-rest-notes').value = '';
+      document.getElementById('mal-rest-confirm').style.display = 'block';
+      setTimeout(() => { document.getElementById('mal-rest-confirm').style.display = 'none'; }, 3000);
+    }
+
+    // Restore state
+    window.addEventListener('DOMContentLoaded', () => {
+      buildMalindiActivities();
+      buildMalindiVenues();
+      const malindi = getVal('malindi');
+      if (malindi === true) goStep(1);
+    });
+
+    let playing = false;
+    function toggleMusic() {
+      const audio = document.getElementById('bg-audio');
+      const btn = document.getElementById('music-btn');
+      const label = document.getElementById('music-label');
+      if (playing) { audio.pause(); playing = false; btn.classList.remove('playing'); label.textContent = '🔇'; }
+      else { audio.play().then(() => { playing = true; btn.classList.add('playing'); label.textContent = '🔊'; }).catch(() => {}); }
+    }
+  </script>
+</body>
+</html>

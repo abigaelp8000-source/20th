@@ -2,7 +2,8 @@
    TWENTY IN PARADISE — Main JS
    ================================================ */
 
-const BIRTHDAY = new Date('2026-07-24T00:00:00');
+const BIRTHDAY = new Date('2026-07-23T00:00:00');
+const GITHUB_PHOTOS = 'https://api.github.com/repos/abigaelp8000-source/20th/contents/assets/photos';
 
 // ── SCREEN REFS ──
 const S = {
@@ -29,18 +30,73 @@ function fadeOut(el, cb) {
 
 // ── BOOT ──
 window.addEventListener('DOMContentLoaded', () => {
-  // Show loading immediately
   S.loading.style.display = 'flex';
   S.loading.style.opacity = '1';
-
-  // Hide everything else
   S.slideshow.style.display  = 'none';
   S.title.style.display      = 'none';
   S.invitation.style.display = 'none';
   S.confirmed.style.display  = 'none';
 
-  setTimeout(() => fadeOut(S.loading, startSlideshow), 3000);
+  // Auto-play audio on first interaction
+  document.addEventListener('click', tryAutoPlay, { once: true });
+
+  setTimeout(() => fadeOut(S.loading, () => loadPhotos()), 3000);
 });
+
+// ── PHOTO LOADING (GitHub API) ──
+function loadPhotos() {
+  fetch(GITHUB_PHOTOS)
+    .then(r => r.json())
+    .then(files => {
+      const photos = Array.isArray(files)
+        ? files.filter(f => /\.(jpg|jpeg|png|webp|gif)$/i.test(f.name))
+        : [];
+      buildSlideshow(photos.length ? photos.map(f => f.download_url) : null);
+    })
+    .catch(() => buildSlideshow(null));
+}
+
+function buildSlideshow(urls) {
+  const frame = document.getElementById('slide-frame');
+  const dotsEl = document.getElementById('slide-dots');
+  frame.innerHTML = '';
+  dotsEl.innerHTML = '';
+
+  // Fallback: use local assets/photos if API fails / no photos
+  const sources = urls || [
+    'assets/photos/01.jpg','assets/photos/02.jpg','assets/photos/03.jpg',
+    'assets/photos/04.jpg','assets/photos/05.jpg','assets/photos/06.jpg',
+    'assets/photos/07.jpg','assets/photos/08.jpg','assets/photos/09.jpg',
+    'assets/photos/10.jpg'
+  ];
+
+  sources.forEach((src, i) => {
+    const slide = document.createElement('div');
+    slide.className = 'slide' + (i === 0 ? ' active' : '');
+    const ph = document.createElement('div');
+    ph.className = 'slide-ph' + (i === sources.length - 1 ? ' current' : '');
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = '';
+    img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;';
+    // if image fails, show palm emoji placeholder
+    img.onerror = () => { img.style.display='none'; fb.style.display='flex'; };
+    const fb = document.createElement('div');
+    fb.className = 'slide-fallback';
+    fb.style.display = 'none';
+    fb.textContent = '🌴';
+    ph.appendChild(img);
+    ph.appendChild(fb);
+    slide.appendChild(ph);
+    frame.appendChild(slide);
+
+    const dot = document.createElement('span');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dotsEl.appendChild(dot);
+  });
+
+  startSlideshow();
+}
 
 // ── SLIDESHOW ──
 function startSlideshow() {
@@ -63,7 +119,7 @@ function startSlideshow() {
 
     slides[current].classList.add('active');
     dots[current].classList.add('active');
-  }, 1800);
+  }, 2000);
 }
 
 // ── TITLE SCREEN ──
@@ -99,6 +155,7 @@ function showInvitation() {
 
 // ── RSVP YES ──
 function confirmRSVP() {
+  try { localStorage.setItem('paradise_2026', JSON.stringify({ ...JSON.parse(localStorage.getItem('paradise_2026') || '{}'), rsvp: 'yes' })); } catch {}
   fadeOut(S.invitation);
   fadeOut(S.title);
   setTimeout(() => {
@@ -109,19 +166,10 @@ function confirmRSVP() {
 
 // ── RSVP NO ──
 function declineRSVP() {
-  fadeOut(S.invitation);
-  const msg = document.createElement('div');
-  msg.style.cssText = `
-    position:fixed; bottom:32px; left:50%; transform:translateX(-50%);
-    background:#FAF8F5; border:1px solid #EDE4D7;
-    padding:18px 32px; font-family:'Cormorant Garamond',serif;
-    font-size:16px; color:#6B1F3A; text-align:center;
-    z-index:999; max-width:90vw; line-height:1.7;
-    animation: slideUpAnim 0.5s ease;
-  `;
-  msg.innerHTML = `Thank you so much for taking the time to view my invitation.<br>You'll definitely be missed, but I appreciate you. ❤️`;
-  document.body.appendChild(msg);
-  setTimeout(() => { msg.style.opacity='0'; msg.style.transition='opacity 0.6s'; setTimeout(()=>msg.remove(),600); }, 5000);
+  try { localStorage.setItem('paradise_2026', JSON.stringify({ ...JSON.parse(localStorage.getItem('paradise_2026') || '{}'), rsvp: 'no' })); } catch {}
+  fadeOut(S.invitation, () => {
+    window.location.href = 'cant-make-it.html';
+  });
 }
 
 // ── CONFETTI ──
@@ -142,19 +190,35 @@ function launchConfetti() {
   }
 }
 
-// ── MUSIC (index page) ──
+// ── MUSIC ──
 let playing = false;
+function tryAutoPlay() {
+  const audio = document.getElementById('bg-audio');
+  if (!audio) return;
+  audio.volume = 0.4;
+  audio.play().then(() => {
+    playing = true;
+    const btn = document.getElementById('music-btn');
+    const label = document.getElementById('music-label');
+    if (btn) btn.classList.add('playing');
+    if (label) label.textContent = '🔊';
+  }).catch(() => {});
+}
+
 function toggleMusic() {
   const audio = document.getElementById('bg-audio');
   const btn   = document.getElementById('music-btn');
   const label = document.getElementById('music-label');
-  if (!audio || audio.error) return;
+  if (!audio) return;
   if (playing) {
     audio.pause(); playing = false;
-    btn.classList.remove('playing'); label.textContent = 'Music';
+    if (btn) btn.classList.remove('playing');
+    if (label) label.textContent = '🔇';
   } else {
     audio.play().then(() => {
-      playing = true; btn.classList.add('playing'); label.textContent = 'Playing';
+      playing = true;
+      if (btn) btn.classList.add('playing');
+      if (label) label.textContent = '🔊';
     }).catch(() => {});
   }
 }

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trip Overview — Twenty in Paradise</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Allura&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+</head>
+<body class="page-body">
+
+  <nav class="page-nav">
+    <a href="dashboard.html" class="nav-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Back
+    </a>
+    <span class="nav-title">Trip Overview</span>
+    <span class="nav-right"></span>
+  </nav>
+
+  <!-- STEP INDICATOR -->
+  <div class="step-indicator" id="step-indicator">
+    <div class="step-item active" data-step="0"><div class="step-dot"></div><span>Overview</span></div>
+    <div class="step-line"></div>
+    <div class="step-item" data-step="1"><div class="step-dot"></div><span>Duration</span></div>
+    <div class="step-line"></div>
+    <div class="step-item" data-step="2"><div class="step-dot"></div><span>Transport</span></div>
+    <div class="step-line"></div>
+    <div class="step-item" data-step="3"><div class="step-dot"></div><span>Maps</span></div>
+  </div>
+
+  <!-- ── STEP 0: OVERVIEW ── -->
+  <div id="step-0" class="step-panel">
+    <div class="page-hero">
+      <div class="page-hero-palm">🌴</div>
+      <p class="page-eyebrow">Chapter 20</p>
+      <h1 class="page-title">Twenty in Paradise</h1>
+      <p class="page-script">Your complete trip guide</p>
+      <div class="page-gold-bar"></div>
+    </div>
+    <div class="page-content">
+
+      <div class="section-block">
+        <div class="section-header">
+          <span class="section-icon">🌊</span>
+          <div>
+            <div class="section-label">Primary Destination</div>
+            <div class="section-heading">Watamu</div>
+          </div>
+        </div>
+        <div class="info-list">
+          <div class="info-row"><span class="ir-label">Arrival</span><span class="ir-value">22nd or 23rd July 2026</span></div>
+          <div class="info-row"><span class="ir-label">Departure</span><span class="ir-value">1st August 2026</span></div>
+          <div class="info-row"><span class="ir-label">Duration</span><span class="ir-value">~9 nights</span></div>
+          <div class="info-row"><span class="ir-label">Birthday</span><span class="ir-value">23rd & 24th July — celebrations 🎉</span></div>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-header">
+          <span class="section-icon">🏡</span>
+          <div>
+            <div class="section-label">Extension</div>
+            <div class="section-heading">Malindi</div>
+          </div>
+        </div>
+        <div class="info-list">
+          <div class="info-row"><span class="ir-label">Arrival</span><span class="ir-value">1st August 2026</span></div>
+          <div class="info-row"><span class="ir-label">Departure</span><span class="ir-value">9th August 2026</span></div>
+          <div class="info-row"><span class="ir-label">Duration</span><span class="ir-value">~8 nights</span></div>
+          <div class="info-row"><span class="ir-label">Note</span><span class="ir-value">Optional — your choice</span></div>
+        </div>
+      </div>
+
+      <div class="note-box">
+        🌴 This is more than a birthday trip — it's sunsets, beach days, late-night conversations, new adventures and memories we'll be talking about for years. Every detail has been planned with you in mind.
+      </div>
+
+    </div>
+    <div class="cta-bar">
+      <span class="cta-hint">Step 1 of 4</span>
+      <button class="cta-btn" onclick="goStep(1)">Choose Duration →</button>
+    </div>
+  </div>
+
+  <!-- ── STEP 1: DURATION ── -->
+  <div id="step-1" class="step-panel" style="display:none">
+    <div class="page-hero">
+      <div class="page-hero-palm">⏱️</div>
+      <p class="page-eyebrow">Your Trip</p>
+      <h1 class="page-title">How Long?</h1>
+      <p class="page-script">every moment counts</p>
+      <div class="page-gold-bar"></div>
+    </div>
+    <div class="page-content">
+      <div class="section-block">
+        <div class="section-header">
+          <span class="section-icon">📅</span>
+          <div>
+            <div class="section-label">Select Your Experience</div>
+            <div class="section-heading">How long will you be joining us?</div>
+          </div>
+        </div>
+        <div class="choice-grid">
+          <div class="choice-card" id="dur-weekend" onclick="selectDuration('weekend')">
+            <div class="choice-icon">🌅</div>
+            <div class="choice-label">Weekend</div>
+            <div class="choice-sub">23rd – 25th July · 2 nights</div>
+          </div>
+          <div class="choice-card" id="dur-week" onclick="selectDuration('week')">
+            <div class="choice-icon">🌊</div>
+            <div class="choice-label">Week</div>
+            <div class="choice-sub">23rd – 30th July · 7 nights</div>
+          </div>
+          <div class="choice-card" id="dur-full" onclick="selectDuration('full')">
+            <div class="choice-icon">🌴</div>
+            <div class="choice-label">Full Experience</div>
+            <div class="choice-sub">Watamu + Malindi · 17 nights</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cta-bar">
+      <button class="cta-btn-ghost" onclick="goStep(0)">← Back</button>
+      <button class="cta-btn" id="dur-next" onclick="goStep(2)" disabled>Choose Transport →</button>
+    </div>
+  </div>
+
+  <!-- ── STEP 2: TRANSPORT ── -->
+  <div id="step-2" class="step-panel" style="display:none">
+    <div class="page-hero">
+      <div class="page-hero-palm">🚆</div>
+      <p class="page-eyebrow">Getting There</p>
+      <h1 class="page-title">Transport</h1>
+      <p class="page-script">how will you arrive?</p>
+      <div class="page-gold-bar"></div>
+    </div>
+    <div class="page-content">
+      <div class="section-block">
+        <div class="section-header">
+          <span class="section-icon">🗺️</span>
+          <div>
+            <div class="section-label">Select Transport</div>
+            <div class="section-heading">How will you travel to Watamu?</div>
+          </div>
+        </div>
+        <div class="choice-grid">
+          <div class="choice-card" id="tr-bus" onclick="selectTransport('bus')">
+            <div class="choice-icon">🚌</div>
+            <div class="choice-label">Bus</div>
+            <div class="choice-sub">Direct to Watamu · Budget-friendly</div>
+          </div>
+          <div class="choice-card" id="tr-flight" onclick="selectTransport('flight')">
+            <div class="choice-icon">✈️</div>
+            <div class="choice-label">Flight</div>
+            <div class="choice-sub">Fly to Malindi · Fastest option</div>
+          </div>
+          <div class="choice-card" id="tr-sgr" onclick="selectTransport('sgr')">
+            <div class="choice-icon">🚆</div>
+            <div class="choice-label">SGR</div>
+            <div class="choice-sub">Train to Mombasa · Scenic route</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cta-bar">
+      <button class="cta-btn-ghost" onclick="goStep(1)">← Back</button>
+      <button class="cta-btn" id="tr-next" onclick="goStep(3)" disabled>View Maps →</button>
+    </div>
+  </div>
+
+  <!-- ── STEP 3: MAPS ── -->
+  <div id="step-3" class="step-panel" style="display:none">
+    <div class="page-hero">
+      <div class="page-hero-palm">🗺️</div>
+      <p class="page-eyebrow">Find Your Way</p>
+      <h1 class="page-title">Maps & Directions</h1>
+      <p class="page-script">everything you need to arrive</p>
+      <div class="page-gold-bar"></div>
+    </div>
+    <div class="page-content wide" id="maps-content">
+      <!-- populated by JS based on transport choice -->
+    </div>
+    <div class="cta-bar">
+      <button class="cta-btn-ghost" onclick="goStep(2)">← Back</button>
+      <a href="accommodation.html" class="cta-btn">View Accommodation →</a>
+    </div>
+  </div>
+
+  <button class="music-btn" id="music-btn" onclick="toggleMusic()" title="Toggle music" style="bottom:80px">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+    <span id="music-label">🔇</span>
+  </button>
+  <audio id="bg-audio" loop><source src="assets/audio/waves.mp3" type="audio/mpeg"></audio>
+
+  <script src="js/state.js"></script>
+  <script>
+    let currentStep = 0;
+
+    // Restore saved selections
+    window.addEventListener('DOMContentLoaded', () => {
+      const dur = getVal('duration');
+      const tr  = getVal('transport');
+      if (dur) { selectDuration(dur, true); }
+      if (tr)  { selectTransport(tr, true); }
+    });
+
+    function goStep(n) {
+      document.getElementById('step-' + currentStep).style.display = 'none';
+      document.getElementById('step-' + n).style.display = 'block';
+      currentStep = n;
+      updateStepIndicator(n);
+      window.scrollTo(0, 0);
+      if (n === 3) buildMaps();
+    }
+
+    function updateStepIndicator(active) {
+      document.querySelectorAll('.step-item').forEach((el, i) => {
+        el.classList.toggle('active', i === active);
+        el.classList.toggle('done', i < active);
+      });
+    }
+
+    function selectDuration(val, silent) {
+      ['weekend','week','full'].forEach(v => {
+        document.getElementById('dur-' + v).classList.toggle('selected', v === val);
+      });
+      if (!silent) saveState({ duration: val });
+      document.getElementById('dur-next').disabled = false;
+    }
+
+    function selectTransport(val, silent) {
+      ['bus','flight','sgr'].forEach(v => {
+        document.getElementById('tr-' + v).classList.toggle('selected', v === val);
+      });
+      if (!silent) saveState({ transport: val });
+      document.getElementById('tr-next').disabled = false;
+    }
+
+    function buildMaps() {
+      const tr = getVal('transport', 'bus');
+      const el = document.getElementById('maps-content');
+
+      const commonPOI = `
+        <div class="section-block">
+          <div class="section-header">
+            <span class="section-icon">📍</span>
+            <div><div class="section-label">Nearby Essentials</div><div class="section-heading">Good to Know</div></div>
+          </div>
+          <div class="map-grid">
+            <div class="map-item">
+              <h4>🏥 Watamu Hospital</h4>
+              <iframe class="map-embed" src="https://maps.google.com/maps?q=Watamu+Health+Center,Kenya&output=embed" loading="lazy" frameborder="0"></iframe>
+            </div>
+            <div class="map-item">
+              <h4>🏦 ATMs & Banks</h4>
+              <iframe class="map-embed" src="https://maps.google.com/maps?q=ATM+Watamu,Kenya&output=embed" loading="lazy" frameborder="0"></iframe>
+            </div>
+            <div class="map-item">
+              <h4>🛒 Supermarkets</h4>
+              <iframe class="map-embed" src="https://maps.google.com/maps?q=supermarket+Watamu,Kenya&output=embed" loading="lazy" frameborder="0"></iframe>
+            </div>
+            <div class="map-item">
+              <h4>💊 Pharmacies</h4>
+              <iframe class="map-embed" src="https://maps.google.com/maps?q=pharmacy+Watamu,Kenya&output=embed" loading="lazy" frameborder="0"></iframe>
+            </div>
+          </div>
+        </div>`;
+
+      if (tr === 'bus') {
+        el.innerHTML = `
+          <div class="note-box">🚌 You're taking the bus — smart choice! Several operators run direct services to Watamu from Nairobi. Book in advance during high season.</div>
+          <div class="section-block">
+            <div class="section-header"><span class="section-icon">🚌</span><div><div class="section-label">Bus Route</div><div class="section-heading">Bus Stop & Pickup</div></div></div>
+            <div class="info-list">
+              <div class="info-row"><span class="ir-label">Operators</span><span class="ir-value">Easy Coach, Modern Coast, Tahmeed</span></div>
+              <div class="info-row"><span class="ir-label">Duration</span><span class="ir-value">~8–10 hours from Nairobi</span></div>
+              <div class="info-row"><span class="ir-label">Drop-off</span><span class="ir-value">Watamu Town / Gede Stage</span></div>
+              <div class="info-row"><span class="ir-label">From Drop-off</span><span class="ir-value">Tuk Tuk or Uber to the villa (~KSh 200–500)</span></div>
+            </div>
+          </div>
+          <div class="section-block">
+            <div class="section-header"><span class="section-icon">🗺️</span><div><div class="section-label">Map</div><div class="section-heading">Watamu Town</div></div></div>
+            <iframe class="map-embed" style="height:350px" src="https://maps.google.com/maps?q=Watamu,Kilifi+County,Kenya&output=embed" loading="lazy" frameborder="0"></iframe>
+          </div>
+          ${commonPOI}`;
+      } else if (tr === 'flight') {
+        el.innerHTML = `
+          <div class="note-box">✈️ Flying is the quickest way to arrive. Fly into Malindi Airport — it's the closest airport to Watamu, just ~30 minutes away.</div>
+          <div class="section-block">
+            <div class="section-header"><span class="section-icon">✈️</span><div><div class="section-label">Flight Info</div><div class="section-heading">Malindi Airport</div></div></div>
+            <div class="info-list">
+              <div class="info-row"><span class="ir-label">Airport</span><span class="ir-value">Malindi Airport (MYD)</span></div>
+              <div class="info-row"><span class="ir-label">Airlines</span><span class="ir-value">Safarilink, AirKenya, Jambojet</span></div>
+              <div class="info-row"><span class="ir-label">Flight time</span><span class="ir-value">~1 hour from Nairobi</span></div>
+              <div class="info-row"><span class="ir-label">Approx. cost</span><span class="ir-value">KSh 8,000 – 15,000 return</span></div>
+              <div class="info-row"><span class="ir-label">From Airport</span><span class="ir-value">Uber / taxi to villa ~KSh 1,500–2,500</span></div>
+            </div>
+          </div>
+          <div class="section-block">
+            <div class="section-header"><span class="section-icon">🗺️</span><div><div class="section-label">Map</div><div class="section-heading">Malindi Airport</div></div></div>
+            <iframe class="map-embed" style="height:350px" src="https://maps.google.com/maps?q=Malindi+Airport,Kenya&output=embed" loading="lazy" frameborder="0"></iframe>
+          </div>
+          ${commonPOI}`;
+      } else {
+        el.innerHTML = `
+          <div class="note-box">🚆 The SGR is a beautiful, scenic journey! Take the train to Mombasa, then connect to Watamu by matatu or private transfer.</div>
+          <div class="section-block">
+            <div class="section-header"><span class="section-icon">🚆</span><div><div class="section-label">SGR Route</div><div class="section-heading">Nairobi → Mombasa → Watamu</div></div></div>
+            <div class="info-list">
+              <div class="info-row"><span class="ir-label">Train</span><span class="ir-value">SGR Madaraka Express</span></div>
+              <div class="info-row"><span class="ir-label">Duration</span><span class="ir-value">~4.5 hours Nairobi → Mombasa</span></div>
+              <div class="info-row"><span class="ir-label">Cost</span><span class="ir-value">~KSh 1,000 (economy) / KSh 3,000 (1st class)</span></div>
+              <div class="info-row"><span class="ir-label">Mombasa → Watamu</span><span class="ir-value">Matatu from Mwembe Tayari (~KSh 400–600)</span></div>
+              <div class="info-row"><span class="ir-label">Or</span><span class="ir-value">Private transfer ~KSh 4,000–6,000</span></div>
+            </div>
+          </div>
+          <div class="section-block">
+            <div class="section-header"><span class="section-icon">🗺️</span><div><div class="section-label">Map</div><div class="section-heading">Mombasa SGR Terminus</div></div></div>
+            <iframe class="map-embed" style="height:350px" src="https://maps.google.com/maps?q=Mombasa+SGR+Terminus,Kenya&output=embed" loading="lazy" frameborder="0"></iframe>
+          </div>
+          ${commonPOI}`;
+      }
+    }
+
+    // Music
+    let playing = false;
+    function toggleMusic() {
+      const audio = document.getElementById('bg-audio');
+      const btn = document.getElementById('music-btn');
+      const label = document.getElementById('music-label');
+      if (playing) {
+        audio.pause(); playing = false;
+        btn.classList.remove('playing'); label.textContent = '🔇';
+      } else {
+        audio.play().then(() => {
+          playing = true; btn.classList.add('playing'); label.textContent = '🔊';
+        }).catch(() => {});
+      }
+    }
+  </script>
+</body>
+</html>
