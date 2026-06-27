@@ -1,7 +1,6 @@
 /* TWENTY IN PARADISE — Main JS */
 
 const BIRTHDAY = new Date('2026-07-24T00:00:00');
-const GITHUB_PHOTOS = 'https://api.github.com/repos/abigaelp8000-source/20th/contents/Intro';
 
 const S = {
   loading:    document.getElementById('screen-loading'),
@@ -31,73 +30,17 @@ window.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => fadeOut(S.loading, loadPhotos), 3000);
 });
 
-/* ── PHOTO LOADING ── */
+/* ── ANIMATED OPENER (no images) ── */
 function loadPhotos() {
-  fetch(GITHUB_PHOTOS)
-    .then(r => r.json())
-    .then(files => {
-      const photos = Array.isArray(files)
-        ? files.filter(f => /\.(jpg|jpeg|png|webp|gif)$/i.test(f.name)).map(f => f.download_url)
-        : [];
-      buildSlideshow(photos.length ? photos : null);
-    })
-    .catch(() => buildSlideshow(null));
+  showOpener();
 }
 
-function buildSlideshow(urls) {
-  const frame = document.getElementById('slide-frame');
-  const dotsEl = document.getElementById('slide-dots');
-  frame.innerHTML = '';
-  dotsEl.innerHTML = '';
-
-  const sources = urls || [
-    'assets/photos/01.jpg','assets/photos/02.jpg','assets/photos/03.jpg',
-    'assets/photos/04.jpg','assets/photos/05.jpg',
-  ];
-
-  sources.forEach((src, i) => {
-    const slide = document.createElement('div');
-    slide.className = 'slide' + (i === 0 ? ' active' : '');
-    const img = document.createElement('img');
-    img.src = src; img.alt = '';
-    const fb = document.createElement('div');
-    fb.className = 'slide-fallback';
-    fb.textContent = '🌴';
-    img.onerror = () => { img.style.display = 'none'; fb.style.display = 'flex'; };
-    slide.appendChild(img); slide.appendChild(fb);
-    frame.appendChild(slide);
-
-    const dot = document.createElement('span');
-    dot.className = 'dot' + (i === 0 ? ' active' : '');
-    dot.style.cssText = 'width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.4);display:inline-block;transition:background 0.3s';
-    dotsEl.appendChild(dot);
-  });
-
-  startSlideshow(sources.length);
-}
-
-function startSlideshow(total) {
-  fadeIn(S.slideshow, 'block');
-  const slides = document.querySelectorAll('.slide');
-  const dots   = document.querySelectorAll('#slide-dots .dot');
-  let current  = 0;
-  const msPerSlide = Math.floor(10000 / total); // 10 seconds total
-
-  const timer = setInterval(() => {
-    slides[current].classList.remove('active');
-    if (dots[current]) dots[current].style.background = 'rgba(255,255,255,0.4)';
-    current++;
-    if (current >= slides.length) {
-      clearInterval(timer);
-      setTimeout(() => fadeOut(S.slideshow, showTitleScreen), 800);
-      return;
-    }
-    slides[current].classList.add('active');
-    if (dots[current]) dots[current].style.background = 'rgba(255,255,255,0.9)';
-    // Restart zoom animation
-    const img = slides[current].querySelector('img');
-    if (img) { img.style.animation = 'none'; requestAnimationFrame(() => img.style.animation = ''); }
-  }, msPerSlide);
+function showOpener() {
+  fadeIn(S.slideshow, 'flex');
+  setTimeout(() => {
+    document.getElementById('opener-text').classList.add('visible');
+  }, 200);
+  setTimeout(() => fadeOut(S.slideshow, showTitleScreen), 4000);
 }
 
 /* ── TITLE SCREEN ── */

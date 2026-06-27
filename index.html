@@ -15,33 +15,55 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Allura&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
   <style>
-    /* ── FULL-SCREEN SLIDESHOW ── */
+    /* ── ANIMATED OPENER ── */
     #screen-slideshow {
       position: fixed; inset: 0;
-      background: #000; z-index: 90;
-      display: none;
+      background: #6B1F3A;
+      background: linear-gradient(135deg, #6B1F3A 0%, #3D0F21 50%, #1a0810 100%);
+      z-index: 90; display: none;
+      align-items: center; justify-content: center;
+      overflow: hidden;
     }
-    .slide {
-      position: absolute; inset: 0;
-      opacity: 0;
-      transition: opacity 0.7s ease;
+    .opener-float {
+      position: absolute; font-size: 120px; opacity: 0.06;
+      animation: floatUp 6s ease-in-out infinite;
+      user-select: none; pointer-events: none;
     }
-    .slide.active { opacity: 1; }
-    .slide img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      animation: slowZoom 6s ease-out forwards;
+    .opener-float:nth-child(1) { left: 5%;  top: 60%; animation-delay: 0s; }
+    .opener-float:nth-child(2) { left: 80%; top: 70%; animation-delay: 1.5s; font-size: 80px; }
+    .opener-float:nth-child(3) { left: 50%; top: 75%; animation-delay: 0.8s; font-size: 90px; }
+    @keyframes floatUp {
+      0%, 100% { transform: translateY(0) rotate(-5deg); }
+      50%       { transform: translateY(-30px) rotate(5deg); }
     }
-    @keyframes slowZoom {
-      from { transform: scale(1); }
-      to   { transform: scale(1.07); }
+    #opener-text {
+      text-align: center; position: relative; z-index: 2;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
     }
-    .slide-fallback {
-      width: 100%; height: 100%;
-      display: none; align-items: center;
-      justify-content: center; font-size: 80px;
-      background: #111;
+    #opener-text.visible { opacity: 1; transform: translateY(0); }
+    .opener-eyebrow {
+      font-family: "Inter", sans-serif; font-size: 10px;
+      letter-spacing: 6px; color: rgba(216,179,106,0.9);
+      text-transform: uppercase; margin-bottom: 20px;
+    }
+    .opener-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(48px, 12vw, 90px); font-weight: 300;
+      color: #FAF8F5; line-height: 1.05; margin-bottom: 12px;
+    }
+    .opener-script {
+      font-family: "Allura", cursive; font-size: clamp(28px, 6vw, 44px);
+      color: rgba(216,179,106,0.85);
+    }
+    .opener-bar {
+      width: 48px; height: 1px; background: rgba(216,179,106,0.6);
+      margin: 20px auto;
+    }
+    .opener-sub {
+      font-family: "Inter", sans-serif; font-size: 11px;
+      letter-spacing: 4px; color: rgba(250,248,245,0.5);
+      text-transform: uppercase;
     }
 
     /* ── ENVELOPE ── */
@@ -204,10 +226,18 @@
     </div>
   </div>
 
-  <!-- SCREEN 2: SLIDESHOW (full screen) -->
+  <!-- SCREEN 2: ANIMATED OPENER -->
   <div id="screen-slideshow">
-    <div id="slide-frame"></div>
-    <div class="slide-dots" id="slide-dots" style="position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:5"></div>
+    <div class="opener-float">🌴</div>
+    <div class="opener-float">🌊</div>
+    <div class="opener-float">🌴</div>
+    <div id="opener-text">
+      <p class="opener-eyebrow">Chapter 20</p>
+      <h1 class="opener-title">Twenty in<br>Paradise</h1>
+      <div class="opener-bar"></div>
+      <p class="opener-script">an unforgettable birthday</p>
+      <p class="opener-sub" style="margin-top:16px">Watamu &amp; Malindi · 2026</p>
+    </div>
   </div>
 
   <!-- SCREEN 3: TITLE / HERO -->
