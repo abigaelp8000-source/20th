@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Twenty in Paradise — Abby's 20th</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Allura&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--  SCREEN 1 · LOADING                        -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div id="screen-loading" class="screen active">
+    <div class="loading-inner">
+      <div class="loading-logo">Abby <span class="gold">✦</span> Twenty</div>
+      <div class="loading-bar-track">
+        <div class="loading-bar-fill" id="loading-bar"></div>
+      </div>
+      <div class="loading-text">Loading memories...</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--  SCREEN 2 · PHOTO SLIDESHOW                -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div id="screen-slideshow" class="screen dark">
+    <div class="slideshow-wrap">
+      <div class="slide-frame">
+
+        <div class="slide active" id="slide-0">
+          <div class="slide-ph"><span class="slide-emoji">👶</span></div>
+          <div class="slide-era">Baby Abby</div>
+        </div>
+
+        <div class="slide" id="slide-1">
+          <div class="slide-ph"><span class="slide-emoji">🌸</span></div>
+          <div class="slide-era">Childhood</div>
+        </div>
+
+        <div class="slide" id="slide-2">
+          <div class="slide-ph"><span class="slide-emoji">📚</span></div>
+          <div class="slide-era">Primary School</div>
+        </div>
+
+        <div class="slide" id="slide-3">
+          <div class="slide-ph"><span class="slide-emoji">🎒</span></div>
+          <div class="slide-era">High School</div>
+        </div>
+
+        <div class="slide" id="slide-4">
+          <div class="slide-ph"><span class="slide-emoji">🎓</span></div>
+          <div class="slide-era">University</div>
+        </div>
+
+        <div class="slide" id="slide-5">
+          <div class="slide-ph recent"><span class="slide-emoji">📸</span></div>
+          <div class="slide-era">Recent</div>
+        </div>
+
+        <div class="slide" id="slide-6">
+          <div class="slide-ph current"><span class="slide-emoji">✨</span></div>
+          <div class="slide-era">Abby, Twenty.</div>
+        </div>
+
+      </div>
+
+      <div class="slide-dots" id="slide-dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--  SCREEN 3 · TITLE REVEAL                   -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div id="screen-title" class="screen">
+    <div class="title-inner">
+      <p class="t-chapter fade-up delay-1">Chapter 20</p>
+      <h1 class="t-main fade-up delay-2">Twenty in<br>Paradise</h1>
+      <p class="t-script fade-up delay-3">an unforgettable birthday experience</p>
+      <div class="gold-bar fade-up delay-4"></div>
+      <p class="t-date fade-up delay-5">July 2026 &nbsp;·&nbsp; Watamu &amp; Malindi</p>
+
+      <div class="countdown fade-up delay-6" id="countdown">
+        <div class="count-unit">
+          <div class="count-num" id="cd-days">--</div>
+          <div class="count-lbl">Days</div>
+        </div>
+        <div class="count-sep">:</div>
+        <div class="count-unit">
+          <div class="count-num" id="cd-hrs">--</div>
+          <div class="count-lbl">Hours</div>
+        </div>
+        <div class="count-sep">:</div>
+        <div class="count-unit">
+          <div class="count-num" id="cd-mins">--</div>
+          <div class="count-lbl">Minutes</div>
+        </div>
+        <div class="count-sep">:</div>
+        <div class="count-unit">
+          <div class="count-num" id="cd-secs">--</div>
+          <div class="count-lbl">Seconds</div>
+        </div>
+      </div>
+
+      <button class="begin-btn fade-up delay-7" onclick="showInvitation()">
+        ✦ &nbsp;Begin the Experience
+      </button>
+    </div>
+
+    <!-- subtle wave bottom -->
+    <svg class="wave-bottom" viewBox="0 0 1440 80" preserveAspectRatio="none">
+      <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#EDE4D7" opacity="0.35"/>
+    </svg>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--  SCREEN 4 · INVITATION OVERLAY             -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div id="screen-invitation" class="overlay hidden">
+    <div class="env-card slide-up">
+      <div class="env-top-ornament">✦</div>
+      <p class="env-greeting">Hey Beautiful,</p>
+      <div class="env-body">
+        <p>I'd absolutely love for you to celebrate my 20th birthday with me.</p>
+        <p>This isn't just another birthday.</p>
+        <p class="env-list">
+          It's <em>sunsets.</em><br>
+          <em>Beach days.</em><br>
+          <em>Late-night conversations.</em><br>
+          <em>New adventures.</em><br>
+          <em>Good food. Amazing people.</em>
+        </p>
+        <p>And memories we'll be talking about for years.</p>
+        <p>I hope you'll join me.</p>
+      </div>
+      <div class="env-sig">Love, Abby 🤍</div>
+      <div class="env-divider"></div>
+      <div class="env-actions">
+        <button class="btn-yes" onclick="confirmRSVP()">✨ &nbsp;I'm Coming</button>
+        <button class="btn-no" onclick="declineRSVP()">I Can't Make It</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--  SCREEN 5 · CONFIRMED                      -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div id="screen-confirmed" class="screen hidden">
+    <div class="confirmed-inner">
+      <div class="conf-sparkle">✦</div>
+      <h2 class="conf-title">Paradise awaits.</h2>
+      <p class="conf-sub">We cannot wait to celebrate with you</p>
+      <a href="dashboard.html" class="conf-btn">Explore the trip &rarr;</a>
+    </div>
+    <div id="confetti-container"></div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
