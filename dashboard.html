@@ -66,7 +66,7 @@
     <div class="dash-hero">
       <div class="palm-bg-dash" aria-hidden="true">🌴</div>
       <p class="dash-eyebrow">Welcome to the Experience</p>
-      <h1 class="dash-title">Hey Beautiful!</h1>
+      <h1 class="dash-title" id="dash-greeting">Hey Beautiful!</h1>
       <p class="dash-script">Paradise is waiting</p>
       <div class="gold-divider"></div>
 
@@ -88,7 +88,13 @@
 
       <p class="dash-sig">Love, Abby 🤍</p>
 
-      <div class="section-divider"><span>✦</span><span>✦</span><span>✦</span></div>
+      <!-- My Choices context bar -->
+      <div id="my-choices-wrap" style="display:none;margin-top:28px">
+        <p style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px">Your Choices</p>
+        <div id="my-choices" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center"></div>
+      </div>
+
+      <div class="section-divider" style="margin-top:36px"><span>✦</span><span>✦</span><span>✦</span></div>
     </div>
 
     <!-- CARDS GRID -->
@@ -148,7 +154,7 @@
         </div>
         <div class="card-text">
           <div class="card-title">Shared Playlist</div>
-          <div class="card-sub">Add your songs</div>
+          <div class="card-sub" id="pl-card-sub">Add your songs</div>
           <div class="card-desc">Our trip soundtrack</div>
         </div>
         <div class="card-arrow">→</div>
@@ -160,7 +166,7 @@
         </div>
         <div class="card-text">
           <div class="card-title">Guestbook</div>
-          <div class="card-sub">Leave a message</div>
+          <div class="card-sub" id="gb-card-sub">Leave a message</div>
           <div class="card-desc">Birthday wishes for Abby</div>
         </div>
         <div class="card-arrow">→</div>
