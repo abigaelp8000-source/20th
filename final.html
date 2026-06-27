@@ -61,6 +61,7 @@
     <p>Paradise is waiting — see you there</p>
     <div style="margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
       <a href="dashboard.html" style="padding:12px 28px;border:1px solid rgba(250,248,245,0.4);color:var(--ivory);text-decoration:none;font-family:var(--font-sans);font-size:10px;letter-spacing:3px;text-transform:uppercase;transition:border-color 0.2s" onmouseover="this.style.borderColor='rgba(250,248,245,0.9)'" onmouseout="this.style.borderColor='rgba(250,248,245,0.4)'">← Back to Dashboard</a>
+      <button onclick="submitTripDetails()" id="submit-trip-btn" style="padding:12px 28px;background:var(--gold);color:#2C2C2C;border:none;cursor:pointer;font-family:var(--font-sans);font-size:10px;letter-spacing:3px;text-transform:uppercase">✓ Submit My Choices</button>
     </div>
     <div style="margin-top:20px;font-size:11px;letter-spacing:2px;opacity:0.6" id="final-countdown">Loading countdown...</div>
   </div>
@@ -76,6 +77,28 @@
       }
       tick();
     })();
+  </script>
+  <script>
+    function submitTripDetails() {
+      const s = typeof getState === 'function' ? getState() : {};
+      const activities = (s.watamu_activities || []).join(', ') || 'None selected';
+      const body = new URLSearchParams({
+        'form-name': 'trip-details',
+        'guest-name': s.guest_name || 'Guest',
+        'duration': s.duration || 'not set',
+        'transport': s.transport || 'not set',
+        'malindi': s.malindi == null ? 'not decided' : s.malindi ? 'Yes' : 'No',
+        'activities': activities
+      });
+      fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString() })
+        .then(() => {
+          const btn = document.getElementById('submit-trip-btn');
+          btn.textContent = '✓ Submitted!';
+          btn.style.background = 'rgba(250,248,245,0.3)';
+          btn.style.color = 'var(--ivory)';
+          btn.disabled = true;
+        }).catch(() => {});
+    }
   </script>
 
   <!-- TABS -->
