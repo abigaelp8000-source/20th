@@ -78,28 +78,6 @@
       tick();
     })();
   </script>
-  <script>
-    function submitTripDetails() {
-      const s = typeof getState === 'function' ? getState() : {};
-      const activities = (s.watamu_activities || []).join(', ') || 'None selected';
-      const body = new URLSearchParams({
-        'form-name': 'trip-details',
-        'guest-name': s.guest_name || 'Guest',
-        'duration': s.duration || 'not set',
-        'transport': s.transport || 'not set',
-        'malindi': s.malindi == null ? 'not decided' : s.malindi ? 'Yes' : 'No',
-        'activities': activities
-      });
-      fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString() })
-        .then(() => {
-          const btn = document.getElementById('submit-trip-btn');
-          btn.textContent = '✓ Submitted!';
-          btn.style.background = 'rgba(250,248,245,0.3)';
-          btn.style.color = 'var(--ivory)';
-          btn.disabled = true;
-        }).catch(() => {});
-    }
-  </script>
 
   <!-- TABS -->
   <div class="tab-bar">
@@ -202,8 +180,33 @@
 
   <div style="padding-bottom:80px"></div>
 
-  <script src="js/state.js"></script>
+  <script src=js/state.js></script>
   <script>
+    function submitTripDetails() {
+      const s = getState();
+      const durMap = { weekend: 'Weekend (22nd–26th July)', week: 'Week (22nd July–1st Aug)', full: 'Full trip (22nd July–9th Aug)' };
+      const trMap  = { bus: 'Bus', flight: 'Flight', sgr: 'SGR Train' };
+      const wActs  = (s.watamu_activities  || []).join(', ') || 'None selected';
+      const mActs  = (s.malindi_activities || []).join(', ') || 'None selected';
+      const body = new URLSearchParams({
+        'form-name':  'trip-details',
+        'guest-name': s.guest_name || 'Guest',
+        'duration':   durMap[s.duration]  || s.duration  || 'Not set',
+        'transport':  trMap[s.transport]  || s.transport  || 'Not set',
+        'malindi':    s.malindi == null ? 'Not decided yet' : s.malindi ? 'Yes — joining Malindi' : 'No — Watamu only',
+        'watamu-activities': wActs,
+        'malindi-activities': mActs
+      });
+      fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString() })
+        .then(() => {
+          const btn = document.getElementById('submit-trip-btn');
+          btn.textContent = '✓ Submitted!';
+          btn.style.background = 'rgba(250,248,245,0.3)';
+          btn.style.color = 'var(--ivory)';
+          btn.disabled = true;
+        }).catch(() => {});
+    }
+
     const FAQS = [
       { q: 'Is the trip self-catering?', a: 'Yes — the villa has a full kitchen and we\'ll be cooking most meals together. Think fresh seafood, tropical fruits, and group breakfasts. Budget around KSh 500–1,000/day for groceries. We\'ll eat out for special occasions.' },
       { q: 'What should I pack?', a: 'Swimwear, bikinis, maxi dresses, short dresses, casual outfits, one night-out outfit, flip flops, sandals, sunscreen (SPF 50+), sunglasses, a hat, power bank, portable fan, toiletries, any medication you need, your ID, and cash (KSh). Check the Watamu guide page for the full interactive packing list.' },
