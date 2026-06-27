@@ -53,7 +53,24 @@
     <div style="font-size:40px;margin-bottom:12px">🌴</div>
     <h2>You're All Set, Beautiful</h2>
     <p>Paradise is waiting — see you there</p>
+    <div style="margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="dashboard.html" style="padding:12px 28px;border:1px solid rgba(250,248,245,0.4);color:var(--ivory);text-decoration:none;font-family:var(--font-sans);font-size:10px;letter-spacing:3px;text-transform:uppercase;transition:border-color 0.2s" onmouseover="this.style.borderColor='rgba(250,248,245,0.9)'" onmouseout="this.style.borderColor='rgba(250,248,245,0.4)'">← Back to Dashboard</a>
+    </div>
+    <div style="margin-top:20px;font-size:11px;letter-spacing:2px;opacity:0.6" id="final-countdown">Loading countdown...</div>
   </div>
+  <script>
+    (function() {
+      const trip = new Date('2026-07-22T00:00:00');
+      function tick() {
+        const diff = trip - new Date();
+        if (diff <= 0) { document.getElementById('final-countdown').textContent = '🌴 The trip has begun!'; return; }
+        const d = Math.floor(diff / 86400000);
+        document.getElementById('final-countdown').textContent = d + ' days until paradise';
+        setTimeout(tick, 60000);
+      }
+      tick();
+    })();
+  </script>
 
   <!-- TABS -->
   <div class="tab-bar">
@@ -210,9 +227,7 @@
       { q: 'How do I get to Watamu?', a: 'You can fly into Malindi Airport (~1 hr from Nairobi), take the SGR train to Mombasa and connect from there, or book a direct bus. Check the Transport section in Trip Overview for full details and cost estimates.' },
       { q: 'Is there WiFi at the villa?', a: 'Yes — the villa has WiFi. Data speeds on the coast can vary so bringing a local SIM for data backup is recommended.' },
       { q: 'Is it safe?', a: 'Watamu and Malindi are popular, well-established tourist destinations on the Kenyan coast. Standard travel safety applies — keep valuables secure, use recommended transport at night, and stick with the group.' },
-      { q: 'What currency do I need?', a: 'Kenyan Shillings (KSh). Withdraw cash from ATMs in Watamu or Malindi town — avoid airport exchange rates. Mpesa is widely accepted for local payments.' },
       { q: 'What\'s the closest hospital?', a: 'Watamu has a local health centre. Malindi has a larger hospital. For serious emergencies, Mombasa has full hospital facilities (~1.5 hrs from Watamu).' },
-      { q: 'Who is Sonnie?', a: 'Sonnie is our content creator for the trip! She\'ll be documenting moments throughout the birthday experience. Her vlog will be shared in the Gallery section after the trip.' },
       { q: 'What if I have more questions?', a: 'Reach out to Abby directly! All the important updates will also be shared in the group chat closer to the trip.' },
     ];
 

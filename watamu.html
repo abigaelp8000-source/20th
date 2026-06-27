@@ -57,18 +57,6 @@
       <div class="activities-grid" id="activities-grid"></div>
     </div>
 
-    <!-- NIGHTLIFE -->
-    <div class="section-block" id="nightlife">
-      <div class="section-header">
-        <span class="section-icon">🌙</span>
-        <div>
-          <div class="section-label">After Dark</div>
-          <div class="section-heading">Nightlife & Bars</div>
-        </div>
-      </div>
-      <div class="note-box" style="margin-bottom:20px">🌙 Watamu comes alive at night. These are the spots for sundowners, dancing, and late nights out — join whatever you're up for.</div>
-      <div class="venues-grid" id="nightlife-grid"></div>
-    </div>
 
     <!-- Suggest Activity -->
     <div class="suggest-form" style="margin-bottom:48px">
@@ -123,10 +111,9 @@
         </div>
       </div>
       <div class="info-list">
-        <div class="info-row"><span class="ir-label">🛺 Tuk Tuk</span><span class="ir-value">KSh 100–300 short trips · negotiate first</span></div>
-        <div class="info-row"><span class="ir-label">🏍️ Boda Boda</span><span class="ir-value">KSh 50–200 · fastest for solo trips</span></div>
-        <div class="info-row"><span class="ir-label">🚕 Uber/Bolt</span><span class="ir-value">Available · best for groups & night travel</span></div>
-        <div class="info-row"><span class="ir-label">🚐 Matatu</span><span class="ir-value">KSh 30–100 · local routes, budget option</span></div>
+        <div class="info-row"><span class="ir-label">🛺 Tuk Tuk</span><span class="ir-value">KSh 300–600 · negotiate fare first</span></div>
+        <div class="info-row"><span class="ir-label">🏍️ Boda Boda</span><span class="ir-value">KSh 100–300 · quickest for solo trips</span></div>
+        <div class="info-row"><span class="ir-label">🚕 Uber</span><span class="ir-value">Not always available · best for groups & nights out</span></div>
         <div class="info-row"><span class="ir-label">Tip</span><span class="ir-value">Always agree on price before boarding a tuk tuk or boda</span></div>
       </div>
     </div>
@@ -322,27 +309,8 @@
       else { audio.play().then(() => { playing = true; btn.classList.add('playing'); label.textContent = '🔊'; }).catch(() => {}); }
     }
 
-    const NIGHTLIFE = [
-      { emoji:'🍹', name:'Lichthaus', type:'Bar & Restaurant · Popular sundowner spot' },
-      { emoji:'🎵', name:'Cocomo', type:'Beach bar · Live music nights' },
-      { emoji:'🌊', name:'Sun Palm Beach Resort', type:'Bar & pool · Night events' },
-      { emoji:'🪨', name:'The Cave', type:'Unique bar experience' },
-      { emoji:'🕺', name:'Watamu Beach Bar', type:'Beach club · Dancing' },
-    ];
-
-    function buildNightlife() {
-      const grid = document.getElementById('nightlife-grid');
-      NIGHTLIFE.forEach(v => {
-        const div = document.createElement('div');
-        div.className = 'venue-card';
-        div.innerHTML = `<div class="venue-emoji">${v.emoji}</div><div class="venue-name">${v.name}</div><div class="venue-type">${v.type}</div>`;
-        grid.appendChild(div);
-      });
-    }
-
     buildActivities();
     buildRestaurants();
-    buildNightlife();
     buildPacking();
   </script>
 </body>

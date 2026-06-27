@@ -46,53 +46,66 @@
     .env-box {
       width: 100%;
       position: relative;
-      background: #FAF8F5;
-      border: 1px solid rgba(216,179,106,0.4);
-      overflow: hidden;
+      background: var(--burgundy);
+      border: 1px solid rgba(107,31,58,0.5);
     }
     .env-ratio { padding-top: 62%; }
-    /* Envelope fold decorations */
-    .env-fold-l, .env-fold-r, .env-fold-b {
-      position: absolute; inset: 0; pointer-events: none;
+
+    /* Fold sides — actual divs so we can animate them */
+    .env-fold-l {
+      position: absolute; top: 0; left: 0; bottom: 0; width: 52%;
+      pointer-events: none; overflow: hidden;
     }
-    .env-fold-l::before {
-      content: '';
-      position: absolute; top: 0; left: 0; bottom: 0;
-      width: 51%;
-      background: rgba(237,228,215,0.5);
+    .env-fold-l .fold-shape {
+      width: 100%; height: 100%;
+      background: rgba(255,255,255,0.1);
       clip-path: polygon(0 0, 100% 50%, 0 100%);
+      transition: transform 0.5s ease 0.35s;
     }
-    .env-fold-r::before {
-      content: '';
-      position: absolute; top: 0; right: 0; bottom: 0;
-      width: 51%;
-      background: rgba(220,212,200,0.5);
+    .env-box.opening .env-fold-l .fold-shape { transform: translateX(-110%); }
+
+    .env-fold-r {
+      position: absolute; top: 0; right: 0; bottom: 0; width: 52%;
+      pointer-events: none; overflow: hidden;
+    }
+    .env-fold-r .fold-shape {
+      width: 100%; height: 100%;
+      background: rgba(255,255,255,0.07);
       clip-path: polygon(100% 0, 0 50%, 100% 100%);
+      transition: transform 0.5s ease 0.35s;
     }
-    .env-fold-b::before {
-      content: '';
-      position: absolute; bottom: 0; left: 0; right: 0;
-      height: 55%;
-      background: rgba(245,240,232,0.7);
-      clip-path: polygon(0 100%, 50% 38%, 100% 100%);
+    .env-box.opening .env-fold-r .fold-shape { transform: translateX(110%); }
+
+    .env-fold-b {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 58%;
+      pointer-events: none; overflow: hidden;
     }
-    /* Flap */
+    .env-fold-b .fold-shape {
+      width: 100%; height: 100%;
+      background: rgba(255,255,255,0.08);
+      clip-path: polygon(0 100%, 50% 36%, 100% 100%);
+      transition: transform 0.5s ease 0.5s;
+    }
+    .env-box.opening .env-fold-b .fold-shape { transform: translateY(110%); }
+
+    /* Flap — top */
     .env-flap-wrap {
       position: absolute; top: 0; left: -1px; right: -1px;
       height: 55%; z-index: 4;
       transform-origin: top center;
       transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
       transform-style: preserve-3d;
+      overflow: hidden;
     }
     .env-flap-front {
       position: absolute; inset: 0;
-      background: #EDE4D7;
+      background: #8B2A4E;
       clip-path: polygon(0 0, 100% 0, 50% 68%);
       backface-visibility: hidden;
     }
     .env-flap-back {
       position: absolute; inset: 0;
-      background: #E5DDD0;
+      background: #7A2344;
       clip-path: polygon(0 0, 100% 0, 50% 68%);
       backface-visibility: hidden;
       transform: rotateX(180deg);
@@ -100,22 +113,23 @@
     .env-box.opening .env-flap-wrap {
       transform: rotateX(-175deg);
     }
-    /* Wax seal */
+
+    /* Wax seal — ivory */
     .wax-seal {
       position: absolute;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 68px; height: 68px;
+      width: 72px; height: 72px;
       border-radius: 50%;
-      background: var(--burgundy);
-      color: var(--gold);
+      background: #FAF8F5;
+      color: var(--burgundy);
       font-size: 26px;
       display: flex; align-items: center; justify-content: center;
-      cursor: pointer; border: none; z-index: 10;
-      box-shadow: 0 4px 18px rgba(107,31,58,0.35);
+      cursor: pointer; border: 2px solid rgba(107,31,58,0.25); z-index: 10;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
       transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), opacity 0.4s;
     }
-    .wax-seal:hover { transform: translate(-50%, -50%) scale(1.07); }
+    .wax-seal:hover { transform: translate(-50%, -50%) scale(1.08); }
     .env-box.opening .wax-seal {
       transform: translate(-50%, -50%) scale(0) rotate(180deg);
       opacity: 0; pointer-events: none;
@@ -225,9 +239,9 @@
       <div class="env-scene" id="env-scene">
         <div class="env-box" id="env-box">
           <div class="env-ratio"></div>
-          <div class="env-fold-l"></div>
-          <div class="env-fold-r"></div>
-          <div class="env-fold-b"></div>
+          <div class="env-fold-l"><div class="fold-shape"></div></div>
+          <div class="env-fold-r"><div class="fold-shape"></div></div>
+          <div class="env-fold-b"><div class="fold-shape"></div></div>
           <div class="env-flap-wrap" id="env-flap">
             <div class="env-flap-front"></div>
             <div class="env-flap-back"></div>

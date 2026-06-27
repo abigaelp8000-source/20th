@@ -167,7 +167,7 @@
     </div>
     <div class="page-content">
       <div class="note-box">
-        🎟️ The Rammor Event is a must-attend experience during our Malindi leg. If you'd like to join, you'll need to purchase a ticket through the official site.
+        🎟️ The Rammor Event is happening during our Malindi leg. If you'd like to join, grab your ticket through the official site below.
       </div>
       <div class="decision-wrap" style="padding:24px 0 64px">
         <p class="decision-q">Will you be joining us at the Rammor Event?</p>
@@ -231,9 +231,10 @@
       saveState({ rammor: yes });
       document.getElementById('rammor-saved').style.display = 'block';
       if (yes) {
-        setTimeout(() => window.open('https://rammor.hustlesasa.shop/', '_blank'), 400);
+        window.open('https://rammor.hustlesasa.shop/', '_blank');
+        setTimeout(() => window.location.href = 'final.html', 800);
       } else {
-        setTimeout(() => window.location.href = 'final.html', 600);
+        setTimeout(() => window.location.href = 'final.html', 500);
       }
     }
 
@@ -305,15 +306,12 @@
 
       // Full experience users already picked Malindi — send straight to guide
       if (dur === 'full') {
-        if (malindi === false) {
-          window.location.href = 'final.html';
-        } else {
-          goStep(1);
-        }
+        // Full experience users: always go straight to guide
+        goStep(1);
         return;
       }
 
-      // Weekend / week: show extension prompt with tailored copy
+      // Weekend / week: always show the decision prompt (even if they answered before)
       const note = document.getElementById('decision-note');
       const q    = document.getElementById('decision-q');
       if (dur === 'weekend') {
@@ -323,8 +321,6 @@
         note.textContent = '🌴 After your week in Watamu, the adventure continues. Would you like to extend to Malindi from 1st–9th August?';
         q.textContent = 'Would you like to extend to Malindi?';
       }
-
-      if (malindi === true) goStep(1);
     });
 
     let playing = false;
