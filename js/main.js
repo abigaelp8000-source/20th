@@ -141,3 +141,20 @@ function launchConfetti() {
     }, i * 35);
   }
 }
+
+// ── MUSIC (index page) ──
+let playing = false;
+function toggleMusic() {
+  const audio = document.getElementById('bg-audio');
+  const btn   = document.getElementById('music-btn');
+  const label = document.getElementById('music-label');
+  if (!audio || audio.error) return;
+  if (playing) {
+    audio.pause(); playing = false;
+    btn.classList.remove('playing'); label.textContent = 'Music';
+  } else {
+    audio.play().then(() => {
+      playing = true; btn.classList.add('playing'); label.textContent = 'Playing';
+    }).catch(() => {});
+  }
+}

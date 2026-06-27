@@ -419,3 +419,68 @@ html, body {
   from { opacity:0; transform: translateY(32px); }
   to   { opacity:1; transform: translateY(0); }
 }
+
+/* ── PALM BG (title + confirmed screens) ── */
+.palm-bg {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -55%);
+  font-size: 320px; opacity: 0.045;
+  pointer-events: none; user-select: none;
+  line-height: 1; z-index: 0;
+}
+.title-inner, .confirmed-inner { position: relative; z-index: 1; }
+
+/* ── INVITATION: compact ── */
+.env-card {
+  background: #FAF8F5;
+  max-width: 400px; width: 100%;
+  padding: 44px 40px;
+  text-align: center;
+  border: 1px solid rgba(216,179,106,0.35);
+  animation: slideUpAnim 0.65s cubic-bezier(0.22,1,0.36,1);
+}
+@media (max-width: 480px) {
+  .env-card { padding: 32px 24px; }
+}
+.env-top-ornament { font-size: 22px; color: #D8B36A; margin-bottom: 18px; letter-spacing: 8px; }
+.env-greeting {
+  font-family: var(--font-script); font-size: 34px;
+  color: var(--burgundy); margin-bottom: 18px;
+}
+.env-body {
+  font-family: var(--font-serif); font-size: 16px;
+  font-weight: 300; color: var(--charcoal); line-height: 1.85; margin-bottom: 24px;
+}
+.env-body p { margin-bottom: 8px; }
+.env-body em { font-style: italic; color: var(--burgundy); }
+.env-sig { font-family: var(--font-script); font-size: 28px; color: var(--burgundy); margin-bottom: 24px; }
+.env-divider { width: 48px; height: 1px; background: var(--gold); margin: 0 auto 24px; }
+.env-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.btn-yes {
+  padding: 12px 28px; background: var(--burgundy); color: var(--ivory);
+  border: none; font-family: var(--font-sans); font-size: 11px;
+  letter-spacing: 3px; text-transform: uppercase; cursor: pointer;
+  transition: background 0.3s;
+}
+.btn-yes:hover { background: var(--burgundy-l); }
+.btn-no {
+  padding: 12px 28px; background: transparent; color: var(--stone);
+  border: 1px solid var(--sand); font-family: var(--font-sans);
+  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  cursor: pointer; transition: border-color 0.3s, color 0.3s;
+  font-weight: 600;
+}
+.btn-no:hover { border-color: var(--stone); color: var(--charcoal); }
+
+/* ── MUSIC BTN (index) ── */
+.music-btn {
+  position: fixed; bottom: 24px; right: 24px;
+  background: rgba(250,248,245,0.9); border: 1px solid #EDE4D7;
+  color: #6B1F3A; cursor: pointer; padding: 10px 16px;
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'Inter', sans-serif; font-size: 10px;
+  letter-spacing: 2px; text-transform: uppercase; z-index: 200;
+  backdrop-filter: blur(4px); transition: border-color 0.3s;
+}
+.music-btn:hover { border-color: #D8B36A; }
+.music-btn.playing { border-color: #D8B36A; color: #D8B36A; }
