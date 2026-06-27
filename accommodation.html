@@ -36,17 +36,11 @@
 
   <div class="page-content">
 
-    <!-- Gallery placeholder -->
+    <!-- Gallery -->
     <div class="section-block">
       <div class="gallery-grid" id="villa-gallery">
-        <div class="gallery-ph">🌴<span>Villa</span></div>
-        <div class="gallery-ph">🏊<span>Pool</span></div>
-        <div class="gallery-ph">🛏️<span>Rooms</span></div>
-        <div class="gallery-ph">🌊<span>Views</span></div>
-        <div class="gallery-ph">🍽️<span>Kitchen</span></div>
-        <div class="gallery-ph">🌅<span>Sunsets</span></div>
+        <div class="gallery-ph">🌴<span>Loading…</span></div>
       </div>
-      <p style="font-size:11px;color:var(--stone);letter-spacing:2px;text-transform:uppercase;margin-top:12px;text-align:center;">Photos coming soon — check back closer to the trip</p>
     </div>
 
     <!-- Details -->
@@ -120,10 +114,9 @@
           <div class="section-heading">Find the Villa</div>
         </div>
       </div>
-      <a href="https://maps.google.com/?q=Watamu,Kilifi,Kenya" target="_blank" class="map-link-btn">📍 Open in Google Maps</a>
-      <p style="font-size:12px;color:var(--stone);margin-top:12px">Exact villa address shared with confirmed guests closer to the trip date.</p>
+      <a href="https://maps.app.goo.gl/ZxGi211GV186mU2D7?g_st=ic" target="_blank" class="map-link-btn">📍 Open in Google Maps</a>
+      <p style="font-size:12px;color:var(--stone);margin-top:12px">Sunrise Villa · Jacaranda Road, Watamu</p>
     </div>
-
 
   </div>
 
@@ -136,18 +129,41 @@
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
     <span id="music-label">🔇</span>
   </button>
-  <audio id="bg-audio" loop><source src="assets/audio/waves.mp3" type="audio/mpeg"></audio>
 
   <script src="js/state.js"></script>
   <script>
-    let playing = false;
-    function toggleMusic() {
-      const audio = document.getElementById('bg-audio');
-      const btn = document.getElementById('music-btn');
-      const label = document.getElementById('music-label');
-      if (playing) { audio.pause(); playing = false; btn.classList.remove('playing'); label.textContent = '🔇'; }
-      else { audio.play().then(() => { playing = true; btn.classList.add('playing'); label.textContent = '🔊'; }).catch(() => {}); }
+    const VILLA_API = 'https://api.github.com/repos/abigaelp8000-source/20th/contents/villa?ref=main';
+    const FALLBACKS = ['🌴','🏊','🛏️','🌊','🍽️','🌅'];
+    const FALLBACK_LABELS = ['Villa','Pool','Rooms','Views','Kitchen','Sunsets'];
+
+    function loadVillaPhotos() {
+      const grid = document.getElementById('villa-gallery');
+      fetch(VILLA_API)
+        .then(r => r.json())
+        .then(files => {
+          const imgs = files.filter(f => /\.(jpe?g|png|webp)$/i.test(f.name));
+          if (!imgs.length) throw new Error('no images');
+          grid.innerHTML = '';
+          imgs.forEach(f => {
+            const img = document.createElement('img');
+            img.src = f.download_url;
+            img.alt = 'Villa photo';
+            img.className = 'gallery-img';
+            img.style = 'width:100%;height:160px;object-fit:cover;border-radius:8px;display:block';
+            grid.appendChild(img);
+          });
+        })
+        .catch(() => {
+          grid.innerHTML = FALLBACKS.map((e,i) =>
+            `<div class="gallery-ph">${e}<span>${FALLBACK_LABELS[i]}</span></div>`
+          ).join('');
+        });
     }
+
+    loadVillaPhotos();
   </script>
+  <div id="yt-bg-player" style="position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;top:-999px"></div>
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="js/music.js"></script>
 </body>
 </html>

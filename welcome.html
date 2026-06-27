@@ -105,16 +105,12 @@
   <button class="music-btn" id="music-btn" onclick="toggleMusic()">
     <span id="music-label">🔇</span>
   </button>
-  <audio id="bg-audio" loop><source src="assets/audio/waves.mp3" type="audio/mpeg"></audio>
   <script>
-    let playing = false;
-    function toggleMusic() {
-      const audio = document.getElementById('bg-audio');
-      const label = document.getElementById('music-label');
-      const btn = document.getElementById('music-btn');
-      if (playing) { audio.pause(); playing = false; btn.classList.remove('playing'); label.textContent = '🔇'; }
-      else { audio.play().then(() => { playing = true; btn.classList.add('playing'); label.textContent = '🔊'; }).catch(() => {}); }
+
     }
   </script>
+  <div id="yt-bg-player" style="position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;top:-999px"></div>
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="js/music.js"></script>
 </body>
 </html>
