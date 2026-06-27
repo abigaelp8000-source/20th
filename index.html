@@ -8,8 +8,174 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Allura&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ── FULL-SCREEN SLIDESHOW ── */
+    #screen-slideshow {
+      position: fixed; inset: 0;
+      background: #000; z-index: 90;
+      display: none;
+    }
+    .slide {
+      position: absolute; inset: 0;
+      opacity: 0;
+      transition: opacity 0.7s ease;
+    }
+    .slide.active { opacity: 1; }
+    .slide img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      animation: slowZoom 3s ease-out forwards;
+    }
+    @keyframes slowZoom {
+      from { transform: scale(1); }
+      to   { transform: scale(1.07); }
+    }
+    .slide-fallback {
+      width: 100%; height: 100%;
+      display: none; align-items: center;
+      justify-content: center; font-size: 80px;
+      background: #111;
+    }
+
+    /* ── ENVELOPE ── */
+    .env-scene {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 0;
+      width: min(460px, 92vw);
+    }
+    .env-box {
+      width: 100%;
+      position: relative;
+      background: #FAF8F5;
+      border: 1px solid rgba(216,179,106,0.4);
+      overflow: hidden;
+    }
+    .env-ratio { padding-top: 62%; }
+    /* Envelope fold decorations */
+    .env-fold-l, .env-fold-r, .env-fold-b {
+      position: absolute; inset: 0; pointer-events: none;
+    }
+    .env-fold-l::before {
+      content: '';
+      position: absolute; top: 0; left: 0; bottom: 0;
+      width: 51%;
+      background: rgba(237,228,215,0.5);
+      clip-path: polygon(0 0, 100% 50%, 0 100%);
+    }
+    .env-fold-r::before {
+      content: '';
+      position: absolute; top: 0; right: 0; bottom: 0;
+      width: 51%;
+      background: rgba(220,212,200,0.5);
+      clip-path: polygon(100% 0, 0 50%, 100% 100%);
+    }
+    .env-fold-b::before {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 55%;
+      background: rgba(245,240,232,0.7);
+      clip-path: polygon(0 100%, 50% 38%, 100% 100%);
+    }
+    /* Flap */
+    .env-flap-wrap {
+      position: absolute; top: 0; left: -1px; right: -1px;
+      height: 55%; z-index: 4;
+      transform-origin: top center;
+      transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+    .env-flap-front {
+      position: absolute; inset: 0;
+      background: #EDE4D7;
+      clip-path: polygon(0 0, 100% 0, 50% 68%);
+      backface-visibility: hidden;
+    }
+    .env-flap-back {
+      position: absolute; inset: 0;
+      background: #E5DDD0;
+      clip-path: polygon(0 0, 100% 0, 50% 68%);
+      backface-visibility: hidden;
+      transform: rotateX(180deg);
+    }
+    .env-box.opening .env-flap-wrap {
+      transform: rotateX(-175deg);
+    }
+    /* Wax seal */
+    .wax-seal {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 68px; height: 68px;
+      border-radius: 50%;
+      background: var(--burgundy);
+      color: var(--gold);
+      font-size: 26px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; border: none; z-index: 10;
+      box-shadow: 0 4px 18px rgba(107,31,58,0.35);
+      transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), opacity 0.4s;
+    }
+    .wax-seal:hover { transform: translate(-50%, -50%) scale(1.07); }
+    .env-box.opening .wax-seal {
+      transform: translate(-50%, -50%) scale(0) rotate(180deg);
+      opacity: 0; pointer-events: none;
+    }
+    .seal-hint {
+      font-size: 9px; letter-spacing: 4px;
+      color: var(--stone); text-transform: uppercase;
+      text-align: center; margin-top: 14px;
+      animation: breathe 2.2s ease-in-out infinite;
+    }
+
+    /* ── INVITATION LETTER (after envelope opens) ── */
+    .env-letter {
+      width: min(460px, 92vw);
+      background: var(--ivory);
+      border: 1px solid rgba(216,179,106,0.35);
+      padding: 48px 40px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+      display: none;
+    }
+    .env-letter.visible {
+      opacity: 1; transform: translateY(0);
+    }
+    @media (max-width: 480px) {
+      .env-letter { padding: 32px 22px; }
+    }
+
+    /* ── CONFIRMED SCREEN ── */
+    .conf-details {
+      border-top: 1px solid var(--sand);
+      border-bottom: 1px solid var(--sand);
+      padding: 20px 0; margin: 24px 0 32px;
+      display: flex; flex-direction: column; gap: 12px;
+      text-align: left;
+    }
+    .conf-detail-row {
+      display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+    }
+    .conf-detail-label {
+      font-size: 10px; letter-spacing: 3px; color: var(--stone);
+      text-transform: uppercase; flex-shrink: 0;
+    }
+    .conf-detail-val {
+      font-family: var(--font-serif); font-size: 15px; color: var(--charcoal);
+      text-align: right;
+    }
+  </style>
 </head>
-<body>
+<body class="index-body">
+
+  <!-- MUSIC BTN — top corner only -->
+  <button class="music-btn" id="music-btn" onclick="toggleMusic()" title="Toggle music" style="bottom:auto;top:20px;right:20px;z-index:300">
+    <span id="music-label">🔇</span>
+  </button>
+  <audio id="bg-audio" loop>
+    <source src="assets/audio/waves.mp3" type="audio/mpeg">
+  </audio>
 
   <!-- SCREEN 1: LOADING -->
   <div id="screen-loading" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#FAF8F5;z-index:100;">
@@ -20,19 +186,14 @@
     </div>
   </div>
 
-  <!-- SCREEN 2: SLIDESHOW -->
-  <div id="screen-slideshow" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:#2F2F2F;z-index:90;">
-    <div class="slideshow-wrap">
-      <div class="slide-frame" id="slide-frame">
-        <!-- dynamically populated by JS from GitHub API -->
-      </div>
-      <div class="slide-dots" id="slide-dots"></div>
-    </div>
+  <!-- SCREEN 2: SLIDESHOW (full screen) -->
+  <div id="screen-slideshow">
+    <div id="slide-frame"></div>
+    <div class="slide-dots" id="slide-dots" style="position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:5"></div>
   </div>
 
-  <!-- SCREEN 3: TITLE -->
+  <!-- SCREEN 3: TITLE / HERO -->
   <div id="screen-title" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:#FAF8F5;z-index:80;overflow:hidden;">
-    <!-- faint palm bg -->
     <div class="palm-bg" aria-hidden="true">🌴</div>
     <div class="title-inner">
       <p class="t-chapter fade-up delay-1">Chapter 20</p>
@@ -49,57 +210,86 @@
         <div class="count-sep">:</div>
         <div class="count-unit"><div class="count-num" id="cd-secs">--</div><div class="count-lbl">Seconds</div></div>
       </div>
-      <button class="begin-btn fade-up delay-7" onclick="showInvitation()">✦ &nbsp;Begin the Experience</button>
+      <button class="begin-btn fade-up delay-7" onclick="showEnvelope()">✦ &nbsp;Begin the Experience</button>
     </div>
     <svg class="wave-bottom" viewBox="0 0 1440 80" preserveAspectRatio="none">
       <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#EDE4D7" opacity="0.4"/>
     </svg>
   </div>
 
-  <!-- SCREEN 4: INVITATION -->
-  <div id="screen-invitation" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(47,47,47,0.75);z-index:110;padding:20px;backdrop-filter:blur(6px);">
-    <div class="env-card">
-      <div class="env-top-ornament">✦</div>
-      <p class="env-greeting">Hey Beautiful,</p>
-      <div class="env-body">
-        <p>I'd absolutely love for you to celebrate my 20th birthday with me.</p>
-        <p>This isn't just another birthday.</p>
-        <p class="env-list">It's <em>sunsets.</em><br><em>Beach days.</em><br><em>Late-night conversations.</em><br><em>New adventures.</em><br><em>Good food. Amazing people.</em></p>
-        <p>And memories we'll be talking about for years.</p>
-        <p>I hope you'll join me.</p>
+  <!-- SCREEN 4: ENVELOPE / INVITATION -->
+  <div id="screen-invitation" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(47,47,47,0.78);z-index:110;padding:20px;backdrop-filter:blur(8px);overflow-y:auto;">
+    <div id="inv-content" style="display:flex;flex-direction:column;align-items:center;width:100%;padding:20px 0">
+
+      <!-- SEALED ENVELOPE -->
+      <div class="env-scene" id="env-scene">
+        <div class="env-box" id="env-box">
+          <div class="env-ratio"></div>
+          <div class="env-fold-l"></div>
+          <div class="env-fold-r"></div>
+          <div class="env-fold-b"></div>
+          <div class="env-flap-wrap" id="env-flap">
+            <div class="env-flap-front"></div>
+            <div class="env-flap-back"></div>
+          </div>
+          <button class="wax-seal" id="wax-seal" onclick="openEnvelope()">✦</button>
+        </div>
+        <p class="seal-hint" id="seal-hint">tap the seal to open</p>
       </div>
-      <div class="env-sig">Love, Abby 🤍</div>
-      <div class="env-divider"></div>
-      <div class="env-actions">
-        <button class="btn-yes" onclick="confirmRSVP()">✨ &nbsp;I'm Coming</button>
-        <button class="btn-no" onclick="declineRSVP()"><strong>I Can't Make It</strong></button>
+
+      <!-- LETTER (shown after envelope opens) -->
+      <div class="env-letter" id="env-letter">
+        <div class="env-top-ornament">✦ &nbsp;&nbsp; ✦ &nbsp;&nbsp; ✦</div>
+        <p class="env-greeting">Hey Beautiful,</p>
+        <div class="env-body">
+          <p>I'd absolutely love for you to celebrate my 20th birthday with me.</p>
+          <p>This isn't just another birthday.</p>
+          <p class="env-list">It's <em>sunsets.</em><br><em>Beach days.</em><br><em>Late-night conversations.</em><br><em>New adventures.</em><br><em>Amazing people.</em></p>
+          <p>And memories we'll be talking about for years.</p>
+          <p>I hope you'll join me.</p>
+        </div>
+        <div class="env-sig">Love, Abby ❤️</div>
+        <div class="env-divider"></div>
+        <div class="env-actions">
+          <button class="btn-yes" onclick="confirmRSVP()">✨ &nbsp;I'm Coming</button>
+          <button class="btn-no" onclick="declineRSVP()">❤️ &nbsp;I Can't Make It</button>
+        </div>
       </div>
+
     </div>
   </div>
 
-  <!-- SCREEN 5: CONFIRMED -->
-  <div id="screen-confirmed" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;flex-direction:column;background:#FAF8F5;z-index:80;">
+  <!-- SCREEN 5: CONFIRMED / CHECKED IN -->
+  <div id="screen-confirmed" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;flex-direction:column;background:#FAF8F5;z-index:80;padding:24px;">
     <div class="palm-bg" aria-hidden="true">🌴</div>
-    <div class="confirmed-inner">
-      <div class="conf-sparkle">✦</div>
-      <h2 class="conf-title">Paradise awaits.</h2>
-      <p class="conf-sub">We cannot wait to celebrate with you</p>
-      <a href="dashboard.html" class="conf-btn">Explore the trip &rarr;</a>
+    <div class="confirmed-inner" style="max-width:420px;width:100%;text-align:center">
+      <p style="font-size:10px;letter-spacing:5px;color:var(--gold);text-transform:uppercase;margin-bottom:16px">You're officially checked in</p>
+      <h2 class="conf-title">Paradise is<br>waiting...</h2>
+      <p class="conf-sub" style="margin-bottom:0">your trip details</p>
+      <div class="conf-details">
+        <div class="conf-detail-row">
+          <span class="conf-detail-label">🌴 Destination</span>
+          <span class="conf-detail-val">Watamu</span>
+        </div>
+        <div class="conf-detail-row">
+          <span class="conf-detail-label">🏡 Extension</span>
+          <span class="conf-detail-val">Malindi</span>
+        </div>
+        <div class="conf-detail-row">
+          <span class="conf-detail-label">📅 Watamu</span>
+          <span class="conf-detail-val">22nd / 23rd July – 1st August</span>
+        </div>
+        <div class="conf-detail-row">
+          <span class="conf-detail-label">📅 Malindi</span>
+          <span class="conf-detail-val">1st August – 9th August</span>
+        </div>
+      </div>
+      <a href="welcome.html" class="conf-btn">🌴 &nbsp;Enter Paradise</a>
     </div>
     <div id="confetti-container"></div>
   </div>
 
-  <!-- MUSIC PLAYER -->
-  <button class="music-btn" id="music-btn" onclick="toggleMusic()" title="Toggle music">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
-    </svg>
-    <span id="music-label">Music</span>
-  </button>
-  <audio id="bg-audio" loop>
-    <source src="assets/audio/waves.mp3" type="audio/mpeg">
-  </audio>
-
+  <script src="js/state.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

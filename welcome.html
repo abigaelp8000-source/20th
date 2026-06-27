@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome — Twenty in Paradise</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Allura&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+    .welcome-screen {
+      position: fixed; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: #FAF8F5; padding: 24px;
+      overflow-y: auto;
+    }
+    .palm-bg {
+      position: fixed; top: 50%; left: 50%;
+      transform: translate(-50%, -55%);
+      font-size: 300px; opacity: 0.04;
+      pointer-events: none; user-select: none; line-height: 1; z-index: 0;
+    }
+    .welcome-card {
+      max-width: 520px; width: 100%;
+      text-align: center; position: relative; z-index: 1;
+      animation: slideUpAnim 0.8s cubic-bezier(0.22,1,0.36,1);
+    }
+    @keyframes slideUpAnim {
+      from { opacity:0; transform:translateY(28px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .w-eyebrow {
+      font-size: 10px; letter-spacing: 6px; color: var(--gold);
+      text-transform: uppercase; margin-bottom: 18px;
+    }
+    .w-title {
+      font-family: var(--font-serif);
+      font-size: clamp(36px, 8vw, 58px); font-weight: 300;
+      color: var(--burgundy); line-height: 1.1; margin-bottom: 10px;
+    }
+    .w-script {
+      font-family: var(--font-script); font-size: 30px;
+      color: var(--stone); margin-bottom: 28px;
+    }
+    .gold-bar { width: 48px; height: 1px; background: var(--gold); margin: 0 auto 32px; }
+    .w-body {
+      font-family: var(--font-serif); font-size: clamp(17px,3vw,20px);
+      font-weight: 300; color: var(--charcoal); line-height: 2.1;
+      margin-bottom: 12px;
+    }
+    .w-body p { margin-bottom: 6px; }
+    .w-body em { font-style: italic; color: var(--burgundy); }
+    .w-sig {
+      font-family: var(--font-script); font-size: 34px;
+      color: var(--burgundy); margin-bottom: 40px;
+    }
+    .w-btn {
+      display: inline-block; padding: 16px 52px;
+      background: var(--burgundy); color: var(--ivory);
+      text-decoration: none; font-family: var(--font-sans);
+      font-size: 12px; letter-spacing: 4px; text-transform: uppercase;
+      transition: background 0.3s, transform 0.2s;
+      border: none; cursor: pointer;
+    }
+    .w-btn:hover { background: var(--burgundy-l); }
+    .w-btn:active { transform: scale(0.97); }
+    /* bottom music btn */
+    .music-btn {
+      position: fixed; bottom: 24px; right: 24px;
+      background: rgba(250,248,245,0.9); border: 1px solid #EDE4D7;
+      color: #6B1F3A; cursor: pointer; padding: 10px 14px;
+      font-family: 'Inter', sans-serif; font-size: 11px;
+      letter-spacing: 2px; z-index: 200; backdrop-filter: blur(4px);
+    }
+    .music-btn.playing { border-color: #D8B36A; color: #D8B36A; }
+  </style>
+</head>
+<body>
+  <div class="palm-bg" aria-hidden="true">🌴</div>
+  <div class="welcome-screen">
+    <div class="welcome-card">
+      <p class="w-eyebrow">Welcome to the Experience</p>
+      <h1 class="w-title">Hey Beautiful!</h1>
+      <p class="w-script">Paradise is waiting</p>
+      <div class="gold-bar"></div>
+      <div class="w-body">
+        <p>Everything you need is here.</p>
+        <p><em>Plan your trip.</em></p>
+        <p><em>Discover what's waiting for you.</em></p>
+        <p><em>Add your favourite songs to our playlist.</em></p>
+        <p>Get excited because we're about to make<br>unforgettable memories together.</p>
+      </div>
+      <div class="w-sig">Love, Abby ❤️</div>
+      <a href="trip.html" class="w-btn">🌴 &nbsp;Trip Overview</a>
+    </div>
+  </div>
+
+  <button class="music-btn" id="music-btn" onclick="toggleMusic()">
+    <span id="music-label">🔇</span>
+  </button>
+  <audio id="bg-audio" loop><source src="assets/audio/waves.mp3" type="audio/mpeg"></audio>
+  <script>
+    let playing = false;
+    function toggleMusic() {
+      const audio = document.getElementById('bg-audio');
+      const label = document.getElementById('music-label');
+      const btn = document.getElementById('music-btn');
+      if (playing) { audio.pause(); playing = false; btn.classList.remove('playing'); label.textContent = '🔇'; }
+      else { audio.play().then(() => { playing = true; btn.classList.add('playing'); label.textContent = '🔊'; }).catch(() => {}); }
+    }
+  </script>
+</body>
+</html>

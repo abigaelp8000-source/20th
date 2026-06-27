@@ -26,6 +26,10 @@ html, body {
   background: var(--ivory);
   color: var(--charcoal);
   font-family: var(--font-sans);
+}
+
+/* Only lock scroll on the index/landing page */
+body.index-body {
   overflow: hidden;
 }
 

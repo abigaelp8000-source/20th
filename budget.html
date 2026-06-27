@@ -46,13 +46,6 @@
       <table class="budget-table" id="budget-table"></table>
     </div>
 
-    <!-- TOTAL -->
-    <div style="background:var(--burgundy);color:var(--ivory);padding:32px;text-align:center;margin-bottom:32px">
-      <div style="font-size:11px;letter-spacing:4px;text-transform:uppercase;opacity:0.7;margin-bottom:8px">Estimated Total</div>
-      <div style="font-family:var(--font-serif);font-size:clamp(40px,8vw,64px);font-weight:300;line-height:1" id="grand-total">—</div>
-      <div style="font-size:11px;letter-spacing:2px;opacity:0.6;margin-top:8px">Kenyan Shillings</div>
-    </div>
-
     <div class="budget-note" style="margin-bottom:48px">
       ⚠️ This estimate is for planning purposes only. Prices for accommodation, activities and transport may change. The cooking budget assumes most meals are prepared at the villa. Always carry a little extra for unexpected expenses — and for extra fun! 🌴
     </div>
@@ -170,8 +163,6 @@
       totalRow.className = 'bt-total';
       totalRow.innerHTML = `<td>Estimated Total</td><td>${fmt(total)}</td>`;
       table.appendChild(totalRow);
-
-      document.getElementById('grand-total').textContent = fmt(total);
 
       // Show duration/trip info
       const info = [];
