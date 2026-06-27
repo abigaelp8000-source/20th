@@ -82,7 +82,6 @@
   <div class="tab-bar">
     <button class="tab-btn active" onclick="showTab('playlist')">🎵 Playlist</button>
     <button class="tab-btn" onclick="showTab('guestbook')">💌 Guestbook</button>
-    <button class="tab-btn" onclick="showTab('gallery')">📸 Gallery</button>
     <button class="tab-btn" onclick="showTab('faq')">❓ FAQ</button>
   </div>
 
@@ -162,43 +161,7 @@
     </div>
   </div>
 
-  <!-- ── GALLERY ── -->
-  <div id="tab-gallery" class="tab-panel">
-    <div class="page-content wide">
-      <div class="section-block">
-        <div class="section-header">
-          <span class="section-icon">📸</span>
-          <div><div class="section-label">Memories</div><div class="section-heading">Gallery</div></div>
-        </div>
 
-        <div class="note-box" style="margin-bottom:28px">
-          📸 <strong>Before the trip:</strong> Destination photos and sneak peeks. <strong>After the trip:</strong> All our favourite moments, the vlog by Sonnie, and trip highlights will live here.
-        </div>
-
-        <!-- Destination photos placeholder -->
-        <p style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px">Destination Previews</p>
-        <div class="gallery-grid" id="gallery-grid">
-          <div class="gallery-ph">🌊<span>Watamu Beach</span></div>
-          <div class="gallery-ph">🐠<span>Marine Park</span></div>
-          <div class="gallery-ph">🌅<span>Sunsets</span></div>
-          <div class="gallery-ph">⛵<span>Dhow Cruises</span></div>
-          <div class="gallery-ph">🌴<span>Malindi</span></div>
-          <div class="gallery-ph">🏊<span>The Villa</span></div>
-        </div>
-
-        <div style="margin-top:40px">
-          <p style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--stone);margin-bottom:16px">After the trip · Coming soon</p>
-          <div style="background:#fff;border:1px solid var(--sand);padding:48px;text-align:center">
-            <div style="font-size:48px;margin-bottom:16px">🎥</div>
-            <p style="font-family:var(--font-serif);font-size:20px;color:var(--burgundy);margin-bottom:8px">Vlog by Sonnie</p>
-            <p style="font-size:13px;color:var(--stone);line-height:1.7">
-              Sonnie will be documenting every beautiful moment throughout our trip.<br>
-              The vlog will be embedded here after the birthday — check back in August!
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 
   <!-- ── FAQ ── -->
@@ -221,7 +184,7 @@
     const FAQS = [
       { q: 'Is the trip self-catering?', a: 'Yes — the villa has a full kitchen and we\'ll be cooking most meals together. Think fresh seafood, tropical fruits, and group breakfasts. Budget around KSh 500–1,000/day for groceries. We\'ll eat out for special occasions.' },
       { q: 'What should I pack?', a: 'Swimwear, bikinis, maxi dresses, short dresses, casual outfits, one night-out outfit, flip flops, sandals, sunscreen (SPF 50+), sunglasses, a hat, power bank, portable fan, toiletries, any medication you need, your ID, and cash (KSh). Check the Watamu guide page for the full interactive packing list.' },
-      { q: 'How much money should I bring?', a: 'Use the Budget Planner page for a personalised estimate based on your travel style. As a rough guide, budget KSh 15,000–30,000+ for a week including transport, accommodation, activities, and food depending on how much you plan to do.' },
+      { q: 'How much money should I bring?', a: 'As a rough guide, budget KSh 15,000–30,000+ for a week including transport, accommodation, activities, and food depending on how much you plan to do.' },
       { q: 'What are the dates exactly?', a: 'Watamu: 22nd or 23rd July – 1st August 2026. Birthday celebrations are on 23rd & 24th July. Malindi extension: 1st – 9th August 2026 (optional).' },
       { q: 'Can I come for just a weekend?', a: 'Absolutely! You\'re welcome to join for just the birthday weekend (23rd–25th July), a full week, or the complete Watamu + Malindi experience. Select your duration in the Trip Overview section.' },
       { q: 'How do I get to Watamu?', a: 'You can fly into Malindi Airport (~1 hr from Nairobi), take the SGR train to Mombasa and connect from there, or book a direct bus. Check the Transport section in Trip Overview for full details and cost estimates.' },
