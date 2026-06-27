@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Playlist & Guestbook — Twenty in Paradise</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Allura&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+  <style>
+    .tab-bar {
+      display: flex; border-bottom: 1px solid var(--sand);
+      background: var(--ivory); position: sticky; top: 56px; z-index: 90;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      padding: 14px 20px; font-family: var(--font-sans);
+      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--stone); background: none; border: none;
+      border-bottom: 2px solid transparent; cursor: pointer;
+      white-space: nowrap; transition: color 0.2s, border-color 0.2s;
+    }
+    .tab-btn.active { color: var(--burgundy); border-bottom-color: var(--burgundy); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .complete-banner {
+      background: linear-gradient(135deg, var(--burgundy), #8B2A4E);
+      color: var(--ivory); text-align: center; padding: 48px 24px;
+      margin-bottom: 40px;
+    }
+    .complete-banner h2 {
+      font-family: var(--font-serif); font-size: clamp(28px,5vw,44px);
+      font-weight: 300; margin-bottom: 8px;
+    }
+    .complete-banner p {
+      font-size: 11px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.7;
+    }
+  </style>
+</head>
+<body class="page-body">
+
+  <nav class="page-nav">
+    <a href="dashboard.html" class="nav-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Back
+    </a>
+    <span class="nav-title">The Final Stop</span>
+    <span class="nav-right"></span>
+  </nav>
+
+  <div class="complete-banner">
+    <div style="font-size:40px;margin-bottom:12px">🌴</div>
+    <h2>You're All Set, Beautiful</h2>
+    <p>Paradise is waiting — see you there</p>
+  </div>
+
+  <!-- TABS -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="showTab('playlist')">🎵 Playlist</button>
+    <button class="tab-btn" onclick="showTab('guestbook')">💌 Guestbook</button>
+    <button class="tab-btn" onclick="showTab('gallery')">📸 Gallery</button>
+    <button class="tab-btn" onclick="showTab('faq')">❓ FAQ</button>
+  </div>
+
+  <!-- ── PLAYLIST ── -->
+  <div id="tab-playlist" class="tab-panel active">
+    <div class="page-content">
+      <div class="section-block">
+        <div class="section-header">
+          <span class="section-icon">🎵</span>
+          <div><div class="section-label">Our Trip Soundtrack</div><div class="section-heading">Shared Playlist</div></div>
+        </div>
+
+        <!-- Spotify embed -->
+        <div class="playlist-embed" style="margin-bottom:24px">
+          <iframe style="border-radius:0" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX4o1oenSJRhf?utm_source=generator&theme=0"
+            width="100%" height="352" frameBorder="0" allowfullscreen=""
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+        <p style="font-size:11px;color:var(--stone);letter-spacing:1px;margin-bottom:24px">
+          🎵 Replace the embed above with Abby's actual Spotify playlist link when ready.
+        </p>
+
+        <!-- Submitted songs -->
+        <div id="playlist-entries" class="playlist-entries"></div>
+
+        <!-- Add song form -->
+        <div class="suggest-form">
+          <h4>🎵 Add a Song to Our Trip Playlist</h4>
+          <div class="form-field">
+            <label>Your Name</label>
+            <input type="text" id="pl-name" placeholder="How should we credit you?" />
+          </div>
+          <div class="form-field">
+            <label>Song Title</label>
+            <input type="text" id="pl-song" placeholder="Song name..." />
+          </div>
+          <div class="form-field">
+            <label>Artist</label>
+            <input type="text" id="pl-artist" placeholder="Artist name..." />
+          </div>
+          <div class="form-field">
+            <label>Why this song? (optional)</label>
+            <input type="text" id="pl-why" placeholder="It gives me beach vibes because..." />
+          </div>
+          <button class="form-submit" onclick="addSong()">Add to Playlist</button>
+          <div id="pl-confirm" style="display:none;margin-top:12px;font-size:13px;color:var(--palm)">✓ Song added! Thanks for the contribution 🎶</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── GUESTBOOK ── -->
+  <div id="tab-guestbook" class="tab-panel">
+    <div class="page-content">
+      <div class="section-block">
+        <div class="section-header">
+          <span class="section-icon">💌</span>
+          <div><div class="section-label">Leave a Message</div><div class="section-heading">Birthday Guestbook</div></div>
+        </div>
+        <p style="font-family:var(--font-serif);font-size:17px;font-weight:300;color:var(--stone);line-height:1.75;margin-bottom:28px">
+          Leave Abby a birthday message, a memory, or just something that makes her smile. This guestbook lives on forever as a digital keepsake. 💌
+        </p>
+
+        <div id="guestbook-entries" class="guestbook-entries"></div>
+
+        <div class="suggest-form">
+          <h4>💌 Write in the Guestbook</h4>
+          <div class="form-field">
+            <label>Your Name</label>
+            <input type="text" id="gb-name" placeholder="How should Abby know you?" />
+          </div>
+          <div class="form-field">
+            <label>Your Message</label>
+            <textarea id="gb-message" rows="5" placeholder="Write something beautiful for Abby's 20th..."></textarea>
+          </div>
+          <button class="form-submit" onclick="addGuestbookEntry()">Leave My Message 💌</button>
+          <div id="gb-confirm" style="display:none;margin-top:12px;font-size:13px;color:var(--palm)">✓ Message saved! Abby will love this. ❤️</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── GALLERY ── -->
+  <div id="tab-gallery" class="tab-panel">
+    <div class="page-content wide">
+      <div class="section-block">
+        <div class="section-header">
+          <span class="section-icon">📸</span>
+          <div><div class="section-label">Memories</div><div class="section-heading">Gallery</div></div>
+        </div>
+
+        <div class="note-box" style="margin-bottom:28px">
+          📸 <strong>Before the trip:</strong> Destination photos and sneak peeks. <strong>After the trip:</strong> All our favourite moments, the vlog by Sonnie, and trip highlights will live here.
+        </div>
+
+        <!-- Destination photos placeholder -->
+        <p style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px">Destination Previews</p>
+        <div class="gallery-grid" id="gallery-grid">
+          <div class="gallery-ph">🌊<span>Watamu Beach</span></div>
+          <div class="gallery-ph">🐠<span>Marine Park</span></div>
+          <div class="gallery-ph">🌅<span>Sunsets</span></div>
+          <div class="gallery-ph">⛵<span>Dhow Cruises</span></div>
+          <div class="gallery-ph">🌴<span>Malindi</span></div>
+          <div class="gallery-ph">🏊<span>The Villa</span></div>
+        </div>
+
+        <div style="margin-top:40px">
+          <p style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--stone);margin-bottom:16px">After the trip · Coming soon</p>
+          <div style="background:#fff;border:1px solid var(--sand);padding:48px;text-align:center">
+            <div style="font-size:48px;margin-bottom:16px">🎥</div>
+            <p style="font-family:var(--font-serif);font-size:20px;color:var(--burgundy);margin-bottom:8px">Vlog by Sonnie</p>
+            <p style="font-size:13px;color:var(--stone);line-height:1.7">
+              Sonnie will be documenting every beautiful moment throughout our trip.<br>
+              The vlog will be embedded here after the birthday — check back in August!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FAQ ── -->
+  <div id="tab-faq" class="tab-panel">
+    <div class="page-content">
+      <div class="section-block">
+        <div class="section-header">
+          <span class="section-icon">❓</span>
+          <div><div class="section-label">All Your Questions</div><div class="section-heading">FAQ</div></div>
+        </div>
+        <div class="faq-list" id="faq-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding-bottom:80px"></div>
+
+  <button class="music-btn" id="music-btn" onclick="toggleMusic()">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+    <span id="music-label">🔇</span>
+  </button>
+  <audio id="bg-audio" loop><source src="assets/audio/waves.mp3" type="audio/mpeg"></audio>
+
+  <script src="js/state.js"></script>
+  <script>
+    const FAQS = [
+      { q: 'Is the trip self-catering?', a: 'Yes — the villa has a full kitchen and we\'ll be cooking most meals together. Think fresh seafood, tropical fruits, and group breakfasts. Budget around KSh 500–1,000/day for groceries. We\'ll eat out for special occasions.' },
+      { q: 'What should I pack?', a: 'Swimwear, bikinis, maxi dresses, short dresses, casual outfits, one night-out outfit, flip flops, sandals, sunscreen (SPF 50+), sunglasses, a hat, power bank, portable fan, toiletries, any medication you need, your ID, and cash (KSh). Check the Watamu guide page for the full interactive packing list.' },
+      { q: 'How much money should I bring?', a: 'Use the Budget Planner page for a personalised estimate based on your travel style. As a rough guide, budget KSh 15,000–30,000+ for a week including transport, accommodation, activities, and food depending on how much you plan to do.' },
+      { q: 'What are the dates exactly?', a: 'Watamu: 22nd or 23rd July – 1st August 2026. Birthday celebrations are on 23rd & 24th July. Malindi extension: 1st – 9th August 2026 (optional).' },
+      { q: 'Can I come for just a weekend?', a: 'Absolutely! You\'re welcome to join for just the birthday weekend (23rd–25th July), a full week, or the complete Watamu + Malindi experience. Select your duration in the Trip Overview section.' },
+      { q: 'How do I get to Watamu?', a: 'You can fly into Malindi Airport (~1 hr from Nairobi), take the SGR train to Mombasa and connect from there, or book a direct bus. Check the Transport section in Trip Overview for full details and cost estimates.' },
+      { q: 'Is there WiFi at the villa?', a: 'Yes — the villa has WiFi. Data speeds on the coast can vary so bringing a local SIM for data backup is recommended.' },
+      { q: 'Is it safe?', a: 'Watamu and Malindi are popular, well-established tourist destinations on the Kenyan coast. Standard travel safety applies — keep valuables secure, use recommended transport at night, and stick with the group.' },
+      { q: 'What currency do I need?', a: 'Kenyan Shillings (KSh). Withdraw cash from ATMs in Watamu or Malindi town — avoid airport exchange rates. Mpesa is widely accepted for local payments.' },
+      { q: 'What\'s the closest hospital?', a: 'Watamu has a local health centre. Malindi has a larger hospital. For serious emergencies, Mombasa has full hospital facilities (~1.5 hrs from Watamu).' },
+      { q: 'Who is Sonnie?', a: 'Sonnie is our content creator for the trip! She\'ll be documenting moments throughout the birthday experience. Her vlog will be shared in the Gallery section after the trip.' },
+      { q: 'What if I have more questions?', a: 'Reach out to Abby directly! All the important updates will also be shared in the group chat closer to the trip.' },
+    ];
+
+    function buildFAQ() {
+      const list = document.getElementById('faq-list');
+      FAQS.forEach((f, i) => {
+        const item = document.createElement('div');
+        item.className = 'faq-item';
+        item.innerHTML = `
+          <div class="faq-q" onclick="toggleFAQ(${i})">
+            <span>${f.q}</span>
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a"><p>${f.a}</p></div>
+        `;
+        list.appendChild(item);
+      });
+    }
+
+    function toggleFAQ(i) {
+      const items = document.querySelectorAll('.faq-item');
+      items[i].classList.toggle('open');
+    }
+
+    function showTab(name) {
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-' + name).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    function addSong() {
+      const name   = document.getElementById('pl-name').value.trim();
+      const song   = document.getElementById('pl-song').value.trim();
+      const artist = document.getElementById('pl-artist').value.trim();
+      const why    = document.getElementById('pl-why').value.trim();
+      if (!song || !artist) { alert('Please enter a song title and artist.'); return; }
+      const playlist = getVal('playlist', []);
+      playlist.push({ name, song, artist, why, date: new Date().toISOString() });
+      saveState({ playlist });
+      ['pl-name','pl-song','pl-artist','pl-why'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('pl-confirm').style.display = 'block';
+      setTimeout(() => { document.getElementById('pl-confirm').style.display = 'none'; }, 4000);
+      renderPlaylist();
+    }
+
+    function renderPlaylist() {
+      const playlist = getVal('playlist', []);
+      const el = document.getElementById('playlist-entries');
+      el.innerHTML = '';
+      playlist.forEach((entry, i) => {
+        const div = document.createElement('div');
+        div.className = 'pl-entry';
+        div.innerHTML = `
+          <div class="pl-num">${i + 1}</div>
+          <div class="pl-info">
+            <div class="pl-song">${entry.song}</div>
+            <div class="pl-artist">${entry.artist}${entry.name ? ' · added by ' + entry.name : ''}</div>
+            ${entry.why ? `<div style="font-size:11px;color:var(--stone);margin-top:3px;font-style:italic">"${entry.why}"</div>` : ''}
+          </div>
+          <div style="font-size:20px">🎵</div>
+        `;
+        el.appendChild(div);
+      });
+    }
+
+    function addGuestbookEntry() {
+      const name    = document.getElementById('gb-name').value.trim();
+      const message = document.getElementById('gb-message').value.trim();
+      if (!name || !message) { alert('Please enter your name and a message.'); return; }
+      const entries = getVal('guestbook', []);
+      entries.push({ name, message, date: new Date().toISOString() });
+      saveState({ guestbook: entries });
+      document.getElementById('gb-name').value = '';
+      document.getElementById('gb-message').value = '';
+      document.getElementById('gb-confirm').style.display = 'block';
+      setTimeout(() => { document.getElementById('gb-confirm').style.display = 'none'; }, 4000);
+      renderGuestbook();
+    }
+
+    function renderGuestbook() {
+      const entries = getVal('guestbook', []);
+      const el = document.getElementById('guestbook-entries');
+      el.innerHTML = '';
+      entries.slice().reverse().forEach(entry => {
+        const div = document.createElement('div');
+        div.className = 'gb-entry';
+        const d = new Date(entry.date);
+        div.innerHTML = `
+          <div class="gb-ornament">✦</div>
+          <div class="gb-name">${entry.name}</div>
+          <div class="gb-msg">${entry.message.replace(/\n/g, '<br>')}</div>
+          <div class="gb-date">${d.toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' })}</div>
+        `;
+        el.appendChild(div);
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      buildFAQ();
+      renderPlaylist();
+      renderGuestbook();
+    });
+
+    let playing = false;
+    function toggleMusic() {
+      const audio = document.getElementById('bg-audio');
+      const btn = document.getElementById('music-btn');
+      const label = document.getElementById('music-label');
+      if (playing) { audio.pause(); playing = false; btn.classList.remove('playing'); label.textContent = '🔇'; }
+      else { audio.play().then(() => { playing = true; btn.classList.add('playing'); label.textContent = '🔊'; }).catch(() => {}); }
+    }
+  </script>
+</body>
+</html>

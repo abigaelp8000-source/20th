@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>We'll Miss You — Twenty in Paradise</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Allura&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+    .miss-wrap {
+      position: fixed; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: #FAF8F5; padding: 24px;
+    }
+    .palm-bg {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -55%);
+      font-size: 280px; opacity: 0.04;
+      pointer-events: none; user-select: none; line-height: 1;
+    }
+    .miss-card {
+      max-width: 480px; width: 100%;
+      text-align: center; position: relative; z-index: 1;
+      animation: slideUpAnim 0.7s cubic-bezier(0.22,1,0.36,1);
+    }
+    .miss-ornament {
+      font-size: 22px; color: #D8B36A;
+      letter-spacing: 8px; margin-bottom: 28px; display: block;
+    }
+    .miss-eyebrow {
+      font-size: 10px; letter-spacing: 5px;
+      color: #D8B36A; text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .miss-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(40px, 8vw, 60px); font-weight: 300;
+      color: #6B1F3A; line-height: 1.1; margin-bottom: 8px;
+    }
+    .miss-heart { font-size: 28px; margin-bottom: 32px; display: block; }
+    .miss-divider {
+      width: 48px; height: 1px;
+      background: #D8B36A; margin: 0 auto 32px;
+    }
+    .miss-body {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; font-weight: 300;
+      color: #2F2F2F; line-height: 1.9;
+      margin-bottom: 32px;
+    }
+    .miss-body p { margin-bottom: 8px; }
+    .miss-sig {
+      font-family: 'Allura', cursive;
+      font-size: 34px; color: #6B1F3A;
+      margin-bottom: 40px;
+    }
+    .miss-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-explore {
+      padding: 14px 36px;
+      background: #6B1F3A; color: #FAF8F5;
+      text-decoration: none;
+      font-family: 'Inter', sans-serif; font-size: 11px;
+      letter-spacing: 4px; text-transform: uppercase;
+      transition: background 0.3s;
+      border: none; cursor: pointer;
+    }
+    .btn-explore:hover { background: #8B2A4E; }
+    .btn-back {
+      padding: 14px 28px;
+      background: transparent; color: #B4ACA3;
+      border: 1px solid #EDE4D7;
+      font-family: 'Inter', sans-serif; font-size: 11px;
+      letter-spacing: 3px; text-transform: uppercase;
+      text-decoration: none; transition: border-color 0.3s, color 0.3s;
+    }
+    .btn-back:hover { border-color: #B4ACA3; color: #2F2F2F; }
+    @keyframes slideUpAnim {
+      from { opacity:0; transform: translateY(28px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="miss-wrap">
+    <div class="palm-bg" aria-hidden="true">🌴</div>
+    <div class="miss-card">
+      <span class="miss-ornament">✦ ✦ ✦</span>
+      <p class="miss-eyebrow">Twenty in Paradise</p>
+      <h1 class="miss-title">We'll Miss You</h1>
+      <span class="miss-heart">❤️</span>
+      <div class="miss-divider"></div>
+      <div class="miss-body">
+        <p>Hey Love,</p>
+        <p>Thank you so much for taking the time<br>to visit my birthday website.</p>
+        <p>Although you won't be celebrating with us<br>this time, I truly appreciate you stopping by.</p>
+        <p>Thank you for being part of my journey.</p>
+        <p>I hope we create beautiful memories<br>together very soon.</p>
+      </div>
+      <div class="miss-sig">Love, Abby ❤️</div>
+      <div class="miss-actions">
+        <a href="dashboard.html" class="btn-explore">✨ &nbsp;Explore Anyway</a>
+        <a href="index.html" class="btn-back">← Go Back</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

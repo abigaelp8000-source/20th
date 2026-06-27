@@ -6,14 +6,13 @@
   <title>Dashboard — Twenty in Paradise</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Allura&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://unpkg.com/lucide-static@latest/font/lucide.css" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/dashboard.css" />
 </head>
 <body class="dash-body">
 
   <!-- WELCOME MODAL -->
-  <div id="welcome-modal" class="welcome-overlay">
+  <div id="welcome-modal" class="welcome-overlay" style="display:none">
     <div class="welcome-card">
       <div class="welcome-ornament">✦</div>
       <p class="welcome-hi">You're checked in 🌴</p>
@@ -28,8 +27,8 @@
           <span class="wd-val">🌊 Malindi</span>
         </div>
         <div class="welcome-detail">
-          <span class="wd-label">Date</span>
-          <span class="wd-val">July – August 2026</span>
+          <span class="wd-label">Birthday</span>
+          <span class="wd-val">23rd & 24th July 2026</span>
         </div>
       </div>
       <button class="welcome-btn" onclick="dismissWelcome()">✨ &nbsp;Enter Paradise</button>
@@ -39,19 +38,19 @@
   <!-- MUSIC BTN -->
   <button class="music-btn" id="music-btn" onclick="toggleMusic()" title="Toggle music">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-    <span id="music-label">Music</span>
+    <span id="music-label">🔇</span>
   </button>
   <audio id="bg-audio" loop><source src="assets/audio/waves.mp3" type="audio/mpeg"></audio>
 
   <!-- PROGRESS BAR -->
   <div class="progress-bar-wrap" title="Your experience progress">
-    <span class="progress-label">Experience</span>
-    <div class="progress-dots">
+    <span class="progress-label">Progress</span>
+    <div class="progress-dots" id="progress-dots">
       <span class="pdot done" title="Invitation"></span>
-      <span class="pdot done" title="Dashboard"></span>
       <span class="pdot" title="Trip details"></span>
+      <span class="pdot" title="Accommodation"></span>
+      <span class="pdot" title="Watamu"></span>
       <span class="pdot" title="Budget"></span>
-      <span class="pdot" title="Playlist"></span>
       <span class="pdot" title="Guestbook"></span>
     </div>
   </div>
@@ -66,7 +65,6 @@
       <p class="dash-script">Paradise is waiting</p>
       <div class="gold-divider"></div>
 
-      <!-- Countdown -->
       <div class="dash-countdown">
         <div class="dcount-unit"><span class="dcount-num" id="dd-days">--</span><span class="dcount-lbl">Days</span></div>
         <span class="dcount-sep">·</span>
@@ -78,9 +76,9 @@
       <p class="dash-location">July – August 2026 &nbsp;✦&nbsp; Watamu &amp; Malindi</p>
 
       <p class="dash-welcome-text">
-        Everything you need is here.<br>
+        Everything you need is right here.<br>
         Plan your trip, discover what's waiting for you, add your favourite songs to our playlist,
-        leave me a little note, and get excited — we're about to make unforgettable memories together.
+        leave me a little note — and get excited, because we're about to make unforgettable memories together.
       </p>
 
       <p class="dash-sig">Love, Abby 🤍</p>
@@ -91,115 +89,67 @@
     <!-- CARDS GRID -->
     <div class="dash-grid">
 
-      <div class="dash-card" onclick="comingSoon(this)">
+      <a class="dash-card" href="trip.html">
         <div class="card-icon-wrap">
           <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
         </div>
         <div class="card-text">
           <div class="card-title">Trip Overview</div>
           <div class="card-sub">Watamu & Malindi</div>
-          <div class="card-desc">Everything about your destination</div>
+          <div class="card-desc">Dates, destinations & transport</div>
         </div>
         <div class="card-arrow">→</div>
-      </div>
+      </a>
 
-      <div class="dash-card" onclick="comingSoon(this)">
-        <div class="card-icon-wrap">
-          <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        </div>
-        <div class="card-text">
-          <div class="card-title">Itinerary</div>
-          <div class="card-sub">Day by day</div>
-          <div class="card-desc">Your full trip timeline</div>
-        </div>
-        <div class="card-arrow">→</div>
-      </div>
-
-      <div class="dash-card" onclick="comingSoon(this)">
-        <div class="card-icon-wrap">
-          <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-        </div>
-        <div class="card-text">
-          <div class="card-title">Budget Planner</div>
-          <div class="card-sub">Plan your spend</div>
-          <div class="card-desc">Interactive cost calculator</div>
-        </div>
-        <div class="card-arrow">→</div>
-      </div>
-
-      <div class="dash-card" onclick="comingSoon(this)">
+      <a class="dash-card" href="accommodation.html">
         <div class="card-icon-wrap">
           <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         </div>
         <div class="card-text">
           <div class="card-title">Accommodation</div>
-          <div class="card-sub">The Villa</div>
-          <div class="card-desc">Where we're staying</div>
+          <div class="card-sub">The Villa · KSh 3,500/night</div>
+          <div class="card-desc">Where we're staying in Watamu</div>
         </div>
         <div class="card-arrow">→</div>
-      </div>
+      </a>
 
-      <div class="dash-card" onclick="comingSoon(this)">
-        <div class="card-icon-wrap">
-          <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-        </div>
-        <div class="card-text">
-          <div class="card-title">Transport</div>
-          <div class="card-sub">Getting there</div>
-          <div class="card-desc">Bus, car, carpool, flight</div>
-        </div>
-        <div class="card-arrow">→</div>
-      </div>
-
-      <div class="dash-card" onclick="comingSoon(this)">
-        <div class="card-icon-wrap">
-          <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        </div>
-        <div class="card-text">
-          <div class="card-title">Maps</div>
-          <div class="card-sub">Find everything</div>
-          <div class="card-desc">Beaches, restaurants & more</div>
-        </div>
-        <div class="card-arrow">→</div>
-      </div>
-
-      <div class="dash-card" onclick="comingSoon(this)">
+      <a class="dash-card" href="watamu.html">
         <div class="card-icon-wrap">
           <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
         <div class="card-text">
-          <div class="card-title">Activities</div>
-          <div class="card-sub">Cruise, beach & more</div>
-          <div class="card-desc">Everything we're doing</div>
+          <div class="card-title">Watamu Guide</div>
+          <div class="card-sub">Activities, food & nightlife</div>
+          <div class="card-desc">Everything to do in paradise</div>
         </div>
         <div class="card-arrow">→</div>
-      </div>
+      </a>
 
-      <div class="dash-card" onclick="comingSoon(this)">
+      <a class="dash-card" href="malindi.html">
         <div class="card-icon-wrap">
-          <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
         </div>
         <div class="card-text">
-          <div class="card-title">Dress Code</div>
-          <div class="card-sub">Vacation vibes</div>
-          <div class="card-desc">What to wear & when</div>
+          <div class="card-title">Malindi Guide</div>
+          <div class="card-sub">1st – 9th August</div>
+          <div class="card-desc">The extension experience</div>
         </div>
         <div class="card-arrow">→</div>
-      </div>
+      </a>
 
-      <div class="dash-card" onclick="comingSoon(this)">
+      <a class="dash-card" href="budget.html">
         <div class="card-icon-wrap">
-          <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
         </div>
         <div class="card-text">
-          <div class="card-title">Packing Guide</div>
-          <div class="card-sub">Don't forget a thing</div>
-          <div class="card-desc">Interactive checklist</div>
+          <div class="card-title">Budget Planner</div>
+          <div class="card-sub">Your personalised estimate</div>
+          <div class="card-desc">Interactive cost calculator</div>
         </div>
         <div class="card-arrow">→</div>
-      </div>
+      </a>
 
-      <div class="dash-card" onclick="comingSoon(this)">
+      <a class="dash-card" href="final.html#playlist">
         <div class="card-icon-wrap">
           <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
         </div>
@@ -209,45 +159,45 @@
           <div class="card-desc">Our trip soundtrack</div>
         </div>
         <div class="card-arrow">→</div>
-      </div>
+      </a>
 
-      <div class="dash-card" onclick="comingSoon(this)">
+      <a class="dash-card" href="final.html">
         <div class="card-icon-wrap">
           <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </div>
         <div class="card-text">
           <div class="card-title">Guestbook</div>
           <div class="card-sub">Leave a message</div>
-          <div class="card-desc">Birthday wishes & memories</div>
+          <div class="card-desc">Birthday wishes for Abby</div>
         </div>
         <div class="card-arrow">→</div>
-      </div>
+      </a>
 
-      <div class="dash-card" onclick="comingSoon(this)">
+      <a class="dash-card" href="watamu.html#packing">
+        <div class="card-icon-wrap">
+          <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        </div>
+        <div class="card-text">
+          <div class="card-title">Packing Guide</div>
+          <div class="card-sub">Don't forget a thing</div>
+          <div class="card-desc">Interactive checklist</div>
+        </div>
+        <div class="card-arrow">→</div>
+      </a>
+
+      <a class="dash-card" href="final.html">
         <div class="card-icon-wrap">
           <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
         </div>
         <div class="card-text">
           <div class="card-title">Gallery</div>
-          <div class="card-sub">Trip memories</div>
-          <div class="card-desc">Photos from paradise</div>
+          <div class="card-sub">Destination & trip photos</div>
+          <div class="card-desc">Memories from paradise</div>
         </div>
         <div class="card-arrow">→</div>
-      </div>
+      </a>
 
-      <div class="dash-card" onclick="comingSoon(this)">
-        <div class="card-icon-wrap">
-          <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
-        <div class="card-text">
-          <div class="card-title">Who's Coming</div>
-          <div class="card-sub">The guest list</div>
-          <div class="card-desc">See who'll be there</div>
-        </div>
-        <div class="card-arrow">→</div>
-      </div>
-
-      <div class="dash-card" onclick="comingSoon(this)">
+      <a class="dash-card" href="final.html">
         <div class="card-icon-wrap">
           <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
         </div>
@@ -257,17 +207,62 @@
           <div class="card-desc">Everything you need to know</div>
         </div>
         <div class="card-arrow">→</div>
-      </div>
+      </a>
+
+      <a class="dash-card" href="trip.html">
+        <div class="card-icon-wrap">
+          <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <div class="card-text">
+          <div class="card-title">Transport</div>
+          <div class="card-sub">Bus · SGR · Flight</div>
+          <div class="card-desc">How to get to Watamu</div>
+        </div>
+        <div class="card-arrow">→</div>
+      </a>
+
+      <a class="dash-card" href="admin.html" style="border-color:rgba(216,179,106,0.4)">
+        <div class="card-icon-wrap" style="background:rgba(216,179,106,0.1)">
+          <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="#D8B36A" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div class="card-text">
+          <div class="card-title" style="color:var(--gold)">Admin</div>
+          <div class="card-sub">Abby only</div>
+          <div class="card-desc">Guest list, guestbook & data</div>
+        </div>
+        <div class="card-arrow" style="color:var(--gold)">→</div>
+      </a>
 
     </div>
 
     <div class="section-divider"><span>✦</span><span>✦</span><span>✦</span></div>
-    <p class="dash-footer">Twenty in Paradise &nbsp;✦&nbsp; July – August 2026</p>
+    <p class="dash-footer">Twenty in Paradise &nbsp;✦&nbsp; July – August 2026 &nbsp;✦&nbsp; Watamu & Malindi</p>
   </div>
 
-  <!-- Coming soon toast -->
-  <div id="toast" class="toast hidden"></div>
-
+  <script src="js/state.js"></script>
   <script src="js/dashboard.js"></script>
+  <script>
+    // Show welcome modal only on first visit from invitation
+    window.addEventListener('DOMContentLoaded', () => {
+      const rsvp = getVal('rsvp');
+      const seen = sessionStorage.getItem('dash_seen');
+      if (rsvp === 'yes' && !seen) {
+        document.getElementById('welcome-modal').style.display = 'flex';
+        sessionStorage.setItem('dash_seen', '1');
+      }
+      updateProgress();
+    });
+
+    function updateProgress() {
+      const s = getState();
+      const dots = document.querySelectorAll('.pdot');
+      if (s.rsvp)      dots[0].classList.add('done');
+      if (s.duration)  dots[1].classList.add('done');
+      if (s.transport) dots[2].classList.add('done');
+      if ((s.watamu_activities||[]).length) dots[3].classList.add('done');
+      if (s.duration)  dots[4].classList.add('done');
+      if ((s.guestbook||[]).length) dots[5].classList.add('done');
+    }
+  </script>
 </body>
 </html>

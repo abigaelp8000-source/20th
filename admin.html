@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Twenty in Paradise</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Allura&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+  <style>
+    .lock-screen {
+      position: fixed; inset: 0;
+      background: var(--ivory);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 500; padding: 24px;
+    }
+    .lock-card {
+      max-width: 360px; width: 100%;
+      text-align: center;
+      animation: slideUpAnim 0.6s cubic-bezier(0.22,1,0.36,1);
+    }
+    @keyframes slideUpAnim { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+    .lock-ornament { font-size:40px; margin-bottom:20px; }
+    .lock-title {
+      font-family: var(--font-serif); font-size:32px;
+      font-weight:300; color:var(--burgundy); margin-bottom:8px;
+    }
+    .lock-sub { font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--stone);margin-bottom:32px; }
+    .lock-input {
+      width:100%; padding:14px 16px; border:1px solid var(--sand);
+      background:#fff; font-family:var(--font-sans); font-size:16px;
+      text-align:center; letter-spacing:6px; color:var(--charcoal);
+      outline:none; margin-bottom:12px;
+    }
+    .lock-input:focus { border-color:var(--gold); }
+    .lock-btn {
+      width:100%; padding:14px;
+      background:var(--burgundy); color:var(--ivory);
+      border:none; cursor:pointer;
+      font-family:var(--font-sans); font-size:11px;
+      letter-spacing:4px; text-transform:uppercase; transition:background 0.3s;
+    }
+    .lock-btn:hover { background:var(--burgundy-l); }
+    .lock-error { font-size:12px;color:#c0392b;margin-top:10px;display:none; }
+    .stat-grid {
+      display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+      gap:12px; margin-bottom:32px;
+    }
+    .stat-card {
+      background:#fff; border:1px solid var(--sand);
+      padding:24px 16px; text-align:center;
+    }
+    .stat-num { font-family:var(--font-serif);font-size:40px;font-weight:300;color:var(--burgundy); }
+    .stat-lbl { font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--stone);margin-top:4px; }
+    .export-btn {
+      padding:10px 24px; border:1px solid var(--sand);
+      background:#fff; font-family:var(--font-sans); font-size:10px;
+      letter-spacing:2px; text-transform:uppercase; cursor:pointer;
+      color:var(--charcoal); transition:border-color 0.2s;
+    }
+    .export-btn:hover { border-color:var(--gold); }
+  </style>
+</head>
+<body class="page-body">
+
+  <!-- LOCK SCREEN -->
+  <div class="lock-screen" id="lock-screen">
+    <div class="lock-card">
+      <div class="lock-ornament">🔒</div>
+      <h1 class="lock-title">Admin Access</h1>
+      <p class="lock-sub">Twenty in Paradise · Abby Only</p>
+      <input type="password" class="lock-input" id="pw-input" placeholder="••••••" maxlength="20"
+        onkeydown="if(event.key==='Enter')checkPw()" />
+      <button class="lock-btn" onclick="checkPw()">Enter Dashboard</button>
+      <p class="lock-error" id="pw-error">Incorrect password. Try again.</p>
+      <p style="font-size:11px;color:var(--stone);margin-top:20px">
+        <a href="dashboard.html" style="color:var(--stone)">← Back to site</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- ADMIN CONTENT -->
+  <div id="admin-content" style="display:none">
+
+    <nav class="page-nav">
+      <a href="dashboard.html" class="nav-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        Back to Site
+      </a>
+      <span class="nav-title">Admin Dashboard</span>
+      <button class="export-btn" onclick="exportData()" style="font-size:10px">Export JSON</button>
+    </nav>
+
+    <div class="page-hero">
+      <div class="page-hero-palm">👑</div>
+      <p class="page-eyebrow">Admin Only</p>
+      <h1 class="page-title">Hey Abby 👑</h1>
+      <p class="page-script">here's everything</p>
+      <div class="page-gold-bar"></div>
+    </div>
+
+    <div class="page-content wide">
+
+      <!-- STATS -->
+      <div class="section-block">
+        <div class="section-header">
+          <span class="section-icon">📊</span>
+          <div><div class="section-label">Overview</div><div class="section-heading">At a Glance</div></div>
+        </div>
+        <div class="stat-grid" id="stats-grid"></div>
+      </div>
+
+      <!-- NOTE ABOUT CROSS-DEVICE -->
+      <div class="note-box" style="margin-bottom:32px">
+        ℹ️ <strong>Note:</strong> This dashboard shows data saved on <em>this device</em>. Since the site uses browser localStorage, each guest's data lives on their own device. For full cross-device RSVP tracking, connect a backend (Supabase, Firebase, or Formspree) — ask your developer to wire it up before the invites go out.
+      </div>
+
+      <!-- GUESTBOOK -->
+      <div class="section-block">
+        <div class="section-header">
+          <span class="section-icon">💌</span>
+          <div><div class="section-label">Messages</div><div class="section-heading">Guestbook Entries</div></div>
+        </div>
+        <div class="admin-section">
+          <div class="admin-section-header">Guestbook</div>
+          <table class="admin-table">
+            <thead><tr><th>Name</th><th>Message</th><th>Date</th></tr></thead>
+            <tbody id="admin-guestbook"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PLAYLIST -->
+      <div class="section-block">
+        <div class="section-header">
+          <span class="section-icon">🎵</span>
+          <div><div class="section-label">Songs</div><div class="section-heading">Playlist Submissions</div></div>
+        </div>
+        <div class="admin-section">
+          <div class="admin-section-header">Playlist</div>
+          <table class="admin-table">
+            <thead><tr><th>Song</th><th>Artist</th><th>Added by</th><th>Note</th></tr></thead>
+            <tbody id="admin-playlist"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ACTIVITY SUGGESTIONS -->
+      <div class="section-block">
+        <div class="section-header">
+          <span class="section-icon">💡</span>
+          <div><div class="section-label">Guest Ideas</div><div class="section-heading">Activity & Restaurant Suggestions</div></div>
+        </div>
+        <div class="admin-section">
+          <div class="admin-section-header">Suggestions</div>
+          <table class="admin-table">
+            <thead><tr><th>Name</th><th>Destination</th><th>Notes</th></tr></thead>
+            <tbody id="admin-suggestions"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TRIP STATE -->
+      <div class="section-block">
+        <div class="section-header">
+          <span class="section-icon">🗺️</span>
+          <div><div class="section-label">This Device</div><div class="section-heading">Trip Selections</div></div>
+        </div>
+        <div class="admin-section">
+          <div class="admin-section-header">Planning State</div>
+          <table class="admin-table" id="admin-state-table"></table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/state.js"></script>
+  <script>
+    const ADMIN_PW = 'abby2026';
+
+    function checkPw() {
+      const val = document.getElementById('pw-input').value;
+      if (val === ADMIN_PW) {
+        document.getElementById('lock-screen').style.display = 'none';
+        document.getElementById('admin-content').style.display = 'block';
+        renderAdmin();
+      } else {
+        document.getElementById('pw-error').style.display = 'block';
+        document.getElementById('pw-input').value = '';
+      }
+    }
+
+    function empty(tbody, msg) {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td colspan="10" style="color:var(--stone);text-align:center;padding:20px;font-style:italic">${msg}</td>`;
+      tbody.appendChild(tr);
+    }
+
+    function renderAdmin() {
+      const s = getState();
+
+      // Stats
+      const stats = [
+        { num: (s.playlist||[]).length,               lbl: 'Songs Added' },
+        { num: (s.guestbook||[]).length,              lbl: 'Guestbook Entries' },
+        { num: (s.watamu_activities||[]).length,      lbl: 'Watamu Activities' },
+        { num: (s.malindi_activities||[]).length,     lbl: 'Malindi Activities' },
+        { num: (s.activity_suggestions||[]).length + (s.restaurant_suggestions||[]).length, lbl: 'Suggestions' },
+        { num: (s.packing||[]).length,                lbl: 'Items Packed' },
+      ];
+      const sg = document.getElementById('stats-grid');
+      stats.forEach(st => {
+        const div = document.createElement('div');
+        div.className = 'stat-card';
+        div.innerHTML = `<div class="stat-num">${st.num}</div><div class="stat-lbl">${st.lbl}</div>`;
+        sg.appendChild(div);
+      });
+
+      // Guestbook
+      const gb = document.getElementById('admin-guestbook');
+      const entries = s.guestbook || [];
+      if (!entries.length) { empty(gb, 'No guestbook entries yet'); }
+      else entries.forEach(e => {
+        const d = new Date(e.date).toLocaleDateString('en-GB');
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td><strong>${e.name}</strong></td><td style="max-width:400px">${e.message}</td><td>${d}</td>`;
+        gb.appendChild(tr);
+      });
+
+      // Playlist
+      const pl = document.getElementById('admin-playlist');
+      const songs = s.playlist || [];
+      if (!songs.length) { empty(pl, 'No songs added yet'); }
+      else songs.forEach(e => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td><strong>${e.song}</strong></td><td>${e.artist}</td><td>${e.name || '—'}</td><td style="font-style:italic;color:var(--stone)">${e.why || '—'}</td>`;
+        pl.appendChild(tr);
+      });
+
+      // Suggestions
+      const sugg = document.getElementById('admin-suggestions');
+      const allSugg = [...(s.activity_suggestions||[]).map(x=>({...x,type:'Activity'})), ...(s.restaurant_suggestions||[]).map(x=>({...x,type:'Restaurant'}))];
+      if (!allSugg.length) { empty(sugg, 'No suggestions yet'); }
+      else allSugg.forEach(e => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td><strong>${e.name}</strong> <span style="font-size:10px;color:var(--stone)">(${e.type})</span></td><td>${e.destination}</td><td>${e.notes||'—'}</td>`;
+        sugg.appendChild(tr);
+      });
+
+      // State table
+      const tbl = document.getElementById('admin-state-table');
+      const rows = [
+        ['RSVP', s.rsvp || '—'],
+        ['Duration', s.duration || '—'],
+        ['Transport', s.transport || '—'],
+        ['Malindi', s.malindi == null ? '—' : s.malindi ? 'Yes' : 'No'],
+        ['Ramore', s.ramore == null ? '—' : s.ramore ? 'Yes' : 'No'],
+        ['Watamu Activities', (s.watamu_activities||[]).join(', ') || 'None'],
+        ['Malindi Activities', (s.malindi_activities||[]).join(', ') || 'None'],
+        ['Packing Items', (s.packing||[]).length + ' checked'],
+      ];
+      rows.forEach(([k,v]) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td style="color:var(--stone);font-size:11px;letter-spacing:1px;text-transform:uppercase;width:40%">${k}</td><td><strong>${v}</strong></td>`;
+        tbl.appendChild(tr);
+      });
+    }
+
+    function exportData() {
+      const data = JSON.stringify(getState(), null, 2);
+      const blob = new Blob([data], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'paradise-2026-data.json';
+      a.click(); URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Watamu Guide — Twenty in Paradise</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Allura&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+</head>
+<body class="page-body">
+
+  <nav class="page-nav">
+    <a href="dashboard.html" class="nav-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Back
+    </a>
+    <span class="nav-title">Watamu Guide</span>
+    <span class="nav-right"></span>
+  </nav>
+
+  <div class="page-hero">
+    <div class="page-hero-palm">🌊</div>
+    <p class="page-eyebrow">Primary Destination</p>
+    <h1 class="page-title">Watamu</h1>
+    <p class="page-script">paradise on the coast</p>
+    <div class="page-gold-bar"></div>
+  </div>
+
+  <div class="page-content wide">
+
+    <!-- DHOW ACTIVITIES -->
+    <div class="section-block" id="dhow">
+      <div class="section-header">
+        <span class="section-icon">⛵</span>
+        <div>
+          <div class="section-label">Dhow Activities · All prices per person</div>
+          <div class="section-heading">Out on the Water</div>
+        </div>
+      </div>
+      <div class="activities-grid" id="dhow-grid"></div>
+    </div>
+
+    <!-- OTHER ACTIVITIES -->
+    <div class="section-block" id="activities">
+      <div class="section-header">
+        <span class="section-icon">🌊</span>
+        <div>
+          <div class="section-label">Beach & Water</div>
+          <div class="section-heading">More Activities</div>
+        </div>
+      </div>
+      <div class="activities-grid" id="activities-grid"></div>
+    </div>
+
+    <!-- Suggest Activity -->
+    <div class="suggest-form" style="margin-bottom:48px">
+      <h4>💡 Suggest an Activity</h4>
+      <div class="form-field">
+        <label>Activity Name</label>
+        <input type="text" id="suggest-activity-name" placeholder="e.g. Sunset beach bonfire" />
+      </div>
+      <div class="form-field">
+        <label>Details / Notes</label>
+        <input type="text" id="suggest-activity-notes" placeholder="Price, location, anything useful..." />
+      </div>
+      <button class="form-submit" onclick="submitActivitySuggestion()">Submit Suggestion</button>
+      <div id="activity-suggest-confirm" style="display:none;margin-top:12px;font-size:13px;color:var(--palm)">✓ Thanks! Suggestion saved.</div>
+    </div>
+
+    <!-- RESTAURANTS -->
+    <div class="section-block" id="restaurants">
+      <div class="section-header">
+        <span class="section-icon">🍽️</span>
+        <div>
+          <div class="section-label">Eat & Drink</div>
+          <div class="section-heading">Restaurants & Clubs</div>
+        </div>
+      </div>
+      <div class="note-box" style="margin-bottom:20px">🍳 We'll be cooking most days at the villa. These are our go-to spots for eating out and nights out.</div>
+      <div class="venues-grid" id="restaurants-grid"></div>
+    </div>
+
+    <!-- Suggest Restaurant -->
+    <div class="suggest-form" style="margin-bottom:48px">
+      <h4>🍽️ Suggest a Restaurant or Spot</h4>
+      <div class="form-field">
+        <label>Place Name</label>
+        <input type="text" id="suggest-rest-name" placeholder="e.g. My favourite spot..." />
+      </div>
+      <div class="form-field">
+        <label>Why you love it</label>
+        <input type="text" id="suggest-rest-notes" placeholder="Cuisine, vibe, must-order dish..." />
+      </div>
+      <button class="form-submit" onclick="submitRestSuggestion()">Submit Suggestion</button>
+      <div id="rest-suggest-confirm" style="display:none;margin-top:12px;font-size:13px;color:var(--palm)">✓ Thanks! Suggestion saved.</div>
+    </div>
+
+    <!-- LOCAL TRANSPORT -->
+    <div class="section-block">
+      <div class="section-header">
+        <span class="section-icon">🛺</span>
+        <div>
+          <div class="section-label">Getting Around</div>
+          <div class="section-heading">Local Transport</div>
+        </div>
+      </div>
+      <div class="info-list">
+        <div class="info-row"><span class="ir-label">🛺 Tuk Tuk</span><span class="ir-value">KSh 100–300 short trips · negotiate first</span></div>
+        <div class="info-row"><span class="ir-label">🏍️ Boda Boda</span><span class="ir-value">KSh 50–200 · fastest for solo trips</span></div>
+        <div class="info-row"><span class="ir-label">🚕 Uber/Bolt</span><span class="ir-value">Available · best for groups & night travel</span></div>
+        <div class="info-row"><span class="ir-label">🚐 Matatu</span><span class="ir-value">KSh 30–100 · local routes, budget option</span></div>
+        <div class="info-row"><span class="ir-label">Tip</span><span class="ir-value">Always agree on price before boarding a tuk tuk or boda</span></div>
+      </div>
+    </div>
+
+    <!-- PACKING -->
+    <div class="section-block" id="packing">
+      <div class="section-header">
+        <span class="section-icon">🎒</span>
+        <div>
+          <div class="section-label">Interactive Checklist</div>
+          <div class="section-heading">Packing Guide</div>
+        </div>
+      </div>
+      <p style="font-family:var(--font-serif);font-size:16px;font-weight:300;color:var(--stone);margin-bottom:20px">
+        Tap items to check them off. Your list saves automatically.
+      </p>
+      <div class="packing-grid" id="packing-grid"></div>
+      <div class="add-custom" style="margin-top:16px">
+        <input type="text" id="custom-item-input" placeholder="Add your own item..." />
+        <button onclick="addCustomItem()">+ Add</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="cta-bar">
+    <span class="cta-hint">Next: Malindi decision</span>
+    <a href="malindi.html" class="cta-btn" onclick="saveActivities()">Continue →</a>
+  </div>
+
+  <button class="music-btn" id="music-btn" onclick="toggleMusic()">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+    <span id="music-label">🔇</span>
+  </button>
+  <audio id="bg-audio" loop><source src="assets/audio/waves.mp3" type="audio/mpeg"></audio>
+
+  <script src="js/state.js"></script>
+  <script>
+    const DHOW = [
+      { id:'sunset-cruise',  name:'Sunset Cruise',        price:'KSh 3,500/pp', duration:'~2 hrs', note:'Dhow activity' },
+      { id:'sunset-dinner',  name:'Sunset Dinner',        price:'KSh 5,000/pp', duration:'~3 hrs', note:'Dhow activity' },
+      { id:'star-gazing',    name:'Star Gazing',          price:'KSh 3,000/pp', duration:'~2 hrs', note:'Dhow activity' },
+      { id:'full-day-trip',  name:'Full Day Trip',        price:'KSh 7,000/pp', duration:'Full day', note:'Dhow activity' },
+      { id:'park-fee-day',   name:'Park Fee',             price:'KSh 500/pp',   duration:'Morning or afternoon', note:'Marine National Park' },
+      { id:'park-fee-eve',   name:'Park Fee (Evening)',   price:'KSh 1,000/pp', duration:'Evening entry', note:'Marine National Park' },
+    ];
+
+    const ACTIVITIES = [
+      { id:'clear-kayak',    name:'Clear Kayak Photoshoot', price:'KSh 1,500–3,500', duration:'30 mins',   note:'Transparent kayak' },
+      { id:'paddle-board',   name:'Paddle Boarding',        price:'KSh 1,000–2,500', duration:'1 hr',      note:'' },
+      { id:'canoe-mida',     name:'Canoe at Mida Creek',    price:'KSh 800–2,000',   duration:'1 hr',      note:'Through the mangroves' },
+      { id:'horse-riding',   name:'Beach Horse Riding',     price:'KSh 2,000–5,000', duration:'30–60 mins',note:'' },
+    ];
+
+    const RESTAURANTS = [
+      { emoji:'🍛', name:'Timboni', type:'Swahili Cuisine · Local favourite' },
+      { emoji:'🍽️', name:'Paparemo', type:'Restaurant · Beach vibes' },
+      { emoji:'🍺', name:'Lichthaus', type:'Bar & Restaurant' },
+      { emoji:'🦀', name:'Crabshack', type:'Seafood · Must try' },
+      { emoji:'🏖️', name:'Cocomo', type:'Beach bar & restaurant' },
+      { emoji:'🌶️', name:'Pilipan', type:'Restaurant' },
+      { emoji:'🍦', name:'Non Solo Gelato', type:'Gelato & Café' },
+      { emoji:'🪨', name:'The Cave', type:'Unique dining experience' },
+      { emoji:'🌅', name:'Sun Palm Beach Resort', type:'Resort restaurant & bar' },
+    ];
+
+    const DEFAULT_PACKING = [
+      'Swimwear','Bikinis','Maxi Dresses','Short Dresses',
+      'Casual Outfits','Night Out Outfit','Sandals / Flip Flops',
+      'Sunscreen (SPF 50+)','After-sun Lotion','Sunglasses',
+      'Hat / Cap','Power Bank','Portable Fan',
+      'Toiletries','Medication','ID / Passport',
+      'Cash (KSh)','Reusable Water Bottle','Insect Repellent',
+      'Light Jacket (evenings)','Underwater Camera',
+    ];
+
+    function buildActivities() {
+      const saved = getVal('watamu_activities', []);
+      const build = (items, containerId) => {
+        const grid = document.getElementById(containerId);
+        grid.innerHTML = '';
+        items.forEach(a => {
+          const div = document.createElement('div');
+          div.className = 'activity-card' + (saved.includes(a.id) ? ' selected' : '');
+          div.id = 'ac-' + a.id;
+          div.innerHTML = `
+            <div class="ac-check">✓</div>
+            <div class="ac-name">${a.name}</div>
+            <div class="ac-price">${a.price}</div>
+            <div class="ac-meta">⏱ ${a.duration}</div>
+            ${a.note ? `<div class="ac-note">${a.note}</div>` : ''}
+          `;
+          div.onclick = () => toggleActivity(a.id, 'watamu_activities', 'ac-' + a.id);
+          grid.appendChild(div);
+        });
+      };
+      build(DHOW, 'dhow-grid');
+      build(ACTIVITIES, 'activities-grid');
+    }
+
+    function toggleActivity(id, key, elId) {
+      toggleArrayItem(key, id);
+      document.getElementById(elId).classList.toggle('selected');
+    }
+
+    function buildRestaurants() {
+      const grid = document.getElementById('restaurants-grid');
+      RESTAURANTS.forEach(r => {
+        const div = document.createElement('div');
+        div.className = 'venue-card';
+        div.innerHTML = `<div class="venue-emoji">${r.emoji}</div><div class="venue-name">${r.name}</div><div class="venue-type">${r.type}</div>`;
+        grid.appendChild(div);
+      });
+    }
+
+    function buildPacking() {
+      const saved = getVal('packing', DEFAULT_PACKING.slice(0, 4));
+      const custom = getVal('custom_packing', []);
+      const all = [...DEFAULT_PACKING, ...custom];
+      const grid = document.getElementById('packing-grid');
+      grid.innerHTML = '';
+      all.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'pack-item' + (saved.includes(item) ? ' checked' : '');
+        div.innerHTML = `<div class="pack-checkbox">${saved.includes(item) ? '✓' : ''}</div><span>${item}</span>`;
+        div.onclick = () => togglePackItem(item, div);
+        grid.appendChild(div);
+      });
+    }
+
+    function togglePackItem(item, el) {
+      const arr = getVal('packing', []);
+      const idx = arr.indexOf(item);
+      if (idx === -1) arr.push(item);
+      else arr.splice(idx, 1);
+      saveState({ packing: arr });
+      el.classList.toggle('checked');
+      el.querySelector('.pack-checkbox').textContent = el.classList.contains('checked') ? '✓' : '';
+    }
+
+    function addCustomItem() {
+      const input = document.getElementById('custom-item-input');
+      const val = input.value.trim();
+      if (!val) return;
+      const custom = getVal('custom_packing', []);
+      if (!custom.includes(val)) {
+        custom.push(val);
+        saveState({ custom_packing: custom });
+      }
+      input.value = '';
+      buildPacking();
+    }
+
+    document.getElementById('custom-item-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') addCustomItem();
+    });
+
+    function submitActivitySuggestion() {
+      const name = document.getElementById('suggest-activity-name').value.trim();
+      const notes = document.getElementById('suggest-activity-notes').value.trim();
+      if (!name) return;
+      const suggestions = getVal('activity_suggestions', []);
+      suggestions.push({ name, notes, destination: 'Watamu', date: new Date().toISOString() });
+      saveState({ activity_suggestions: suggestions });
+      document.getElementById('suggest-activity-name').value = '';
+      document.getElementById('suggest-activity-notes').value = '';
+      document.getElementById('activity-suggest-confirm').style.display = 'block';
+      setTimeout(() => { document.getElementById('activity-suggest-confirm').style.display = 'none'; }, 3000);
+    }
+
+    function submitRestSuggestion() {
+      const name = document.getElementById('suggest-rest-name').value.trim();
+      const notes = document.getElementById('suggest-rest-notes').value.trim();
+      if (!name) return;
+      const suggestions = getVal('restaurant_suggestions', []);
+      suggestions.push({ name, notes, destination: 'Watamu', date: new Date().toISOString() });
+      saveState({ restaurant_suggestions: suggestions });
+      document.getElementById('suggest-rest-name').value = '';
+      document.getElementById('suggest-rest-notes').value = '';
+      document.getElementById('rest-suggest-confirm').style.display = 'block';
+      setTimeout(() => { document.getElementById('rest-suggest-confirm').style.display = 'none'; }, 3000);
+    }
+
+    function saveActivities() { /* already saved in real-time */ }
+
+    // Music
+    let playing = false;
+    function toggleMusic() {
+      const audio = document.getElementById('bg-audio');
+      const btn = document.getElementById('music-btn');
+      const label = document.getElementById('music-label');
+      if (playing) { audio.pause(); playing = false; btn.classList.remove('playing'); label.textContent = '🔇'; }
+      else { audio.play().then(() => { playing = true; btn.classList.add('playing'); label.textContent = '🔊'; }).catch(() => {}); }
+    }
+
+    buildActivities();
+    buildRestaurants();
+    buildPacking();
+  </script>
+</body>
+</html>

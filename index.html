@@ -23,40 +23,10 @@
   <!-- SCREEN 2: SLIDESHOW -->
   <div id="screen-slideshow" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:#2F2F2F;z-index:90;">
     <div class="slideshow-wrap">
-      <div class="slide-frame">
-        <div class="slide active">
-          <div class="slide-ph"><img src="assets/photos/01-baby.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="slide-fallback">👶</div></div>
-          <div class="slide-era">Baby Abby</div>
-        </div>
-        <div class="slide">
-          <div class="slide-ph"><img src="assets/photos/02-childhood.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="slide-fallback">🌸</div></div>
-          <div class="slide-era">Childhood</div>
-        </div>
-        <div class="slide">
-          <div class="slide-ph"><img src="assets/photos/03-primary.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="slide-fallback">📚</div></div>
-          <div class="slide-era">Primary School</div>
-        </div>
-        <div class="slide">
-          <div class="slide-ph"><img src="assets/photos/04-highschool.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="slide-fallback">🎒</div></div>
-          <div class="slide-era">High School</div>
-        </div>
-        <div class="slide">
-          <div class="slide-ph"><img src="assets/photos/05-university.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="slide-fallback">🎓</div></div>
-          <div class="slide-era">University</div>
-        </div>
-        <div class="slide">
-          <div class="slide-ph recent"><img src="assets/photos/06-recent.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="slide-fallback">📸</div></div>
-          <div class="slide-era">Recent</div>
-        </div>
-        <div class="slide">
-          <div class="slide-ph current"><img src="assets/photos/07-current.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="slide-fallback">✨</div></div>
-          <div class="slide-era">Abby, Twenty.</div>
-        </div>
+      <div class="slide-frame" id="slide-frame">
+        <!-- dynamically populated by JS from GitHub API -->
       </div>
-      <div class="slide-dots">
-        <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
-        <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
-      </div>
+      <div class="slide-dots" id="slide-dots"></div>
     </div>
   </div>
 
