@@ -4,6 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Trip Overview — Twenty in Paradise</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <meta name="theme-color" content="#6B1F3A" />
+  <meta property="og:title" content="Twenty in Paradise — Abby's 20th 🌴" />
+  <meta property="og:description" content="You're invited to celebrate Abby's 20th birthday in Watamu and Malindi, July–August 2026." />
+  <meta property="og:image" content="https://raw.githubusercontent.com/abigaelp8000-source/20th/feature/full-website-build/intro/image%201.jpeg" />
+  <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Allura&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
@@ -28,7 +34,7 @@
     <div class="step-line"></div>
     <div class="step-item" data-step="2"><div class="step-dot"></div><span>Transport</span></div>
     <div class="step-line"></div>
-    <div class="step-item" data-step="3"><div class="step-dot"></div><span>Locations</span></div>
+    <div class="step-item" data-step="3"><div class="step-dot"></div><span>Your Route</span></div>
   </div>
 
   <!-- ── STEP 0: OVERVIEW ── -->
@@ -167,88 +173,19 @@
     </div>
     <div class="cta-bar">
       <button class="cta-btn-ghost" onclick="goStep(1)">← Back</button>
-      <button class="cta-btn" id="tr-next" onclick="goStep(3)" disabled>View Maps →</button>
+      <button class="cta-btn" id="tr-next" onclick="goStep(3)" disabled>View Route →</button>
     </div>
   </div>
 
-  <!-- ── STEP 3: LOCATIONS ── -->
+  <!-- ── STEP 3: ROUTE ── -->
   <div id="step-3" class="step-panel" style="display:none">
     <div class="page-hero">
-      <div class="page-hero-palm">📍</div>
-      <p class="page-eyebrow">Where You'll Be</p>
-      <h1 class="page-title">Locations</h1>
-      <p class="page-script">find your way</p>
+      <div class="page-hero-palm">🗺️</div>
+      <p class="page-eyebrow">How You Get There</p>
+      <h1 class="page-title" id="route-title">Your Route</h1>
       <div class="page-gold-bar"></div>
     </div>
-    <div class="page-content wide">
-
-      <div class="section-block">
-        <div class="section-header">
-          <span class="section-icon">🌊</span>
-          <div><div class="section-label">Main Destination</div><div class="section-heading">Watamu</div></div>
-        </div>
-        <div class="map-card">
-          <div class="map-card-title">Watamu Village</div>
-          <div class="info-list">
-            <div class="info-row"><span class="ir-label">County</span><span class="ir-value">Kilifi County</span></div>
-            <div class="info-row"><span class="ir-label">From Mombasa</span><span class="ir-value">~115 km North · ~2 hrs by road</span></div>
-            <div class="info-row"><span class="ir-label">From Malindi Airport</span><span class="ir-value">~25 km South · ~30 min</span></div>
-            <div class="info-row"><span class="ir-label">Known For</span><span class="ir-value">Beach, Marine Park, Dhow trips</span></div>
-          </div>
-          <a href="https://maps.google.com/?q=Watamu,Kilifi,Kenya" target="_blank" class="map-link-btn">📍 Open in Google Maps</a>
-        </div>
-      </div>
-
-      <div class="section-block">
-        <div class="section-header">
-          <span class="section-icon">🌴</span>
-          <div><div class="section-label">Extension</div><div class="section-heading">Malindi</div></div>
-        </div>
-        <div class="map-card">
-          <div class="map-card-title">Malindi Town</div>
-          <div class="info-list">
-            <div class="info-row"><span class="ir-label">From Watamu</span><span class="ir-value">~25 km North · ~30 min</span></div>
-            <div class="info-row"><span class="ir-label">Airport</span><span class="ir-value">Malindi Airport (MYD)</span></div>
-            <div class="info-row"><span class="ir-label">Dates</span><span class="ir-value">1st – 9th August 2026</span></div>
-            <div class="info-row"><span class="ir-label">Known For</span><span class="ir-value">Nightlife, Rammor events, restaurants</span></div>
-          </div>
-          <a href="https://maps.google.com/?q=Malindi,Kilifi,Kenya" target="_blank" class="map-link-btn">📍 Open in Google Maps</a>
-        </div>
-      </div>
-
-      <div class="section-block">
-        <div class="section-header">
-          <span class="section-icon">🚂</span>
-          <div><div class="section-label">Travel Hub</div><div class="section-heading">Mombasa SGR Terminus</div></div>
-        </div>
-        <div class="map-card">
-          <div class="map-card-title">Mombasa SGR Terminal · Miritini</div>
-          <div class="info-list">
-            <div class="info-row"><span class="ir-label">To Watamu</span><span class="ir-value">~2 hrs by road</span></div>
-            <div class="info-row"><span class="ir-label">Transport</span><span class="ir-value">Matatu from Mwembe Tayari · KSh 400–600</span></div>
-            <div class="info-row"><span class="ir-label">Private Transfer</span><span class="ir-value">KSh 4,000–6,000</span></div>
-          </div>
-          <a href="https://maps.google.com/?q=Mombasa+SGR+Terminus+Miritini" target="_blank" class="map-link-btn">📍 Open in Google Maps</a>
-        </div>
-      </div>
-
-      <div class="section-block">
-        <div class="section-header">
-          <span class="section-icon">✈️</span>
-          <div><div class="section-label">Nearest Airport</div><div class="section-heading">Malindi Airport</div></div>
-        </div>
-        <div class="map-card">
-          <div class="map-card-title">Malindi Airport (MYD)</div>
-          <div class="info-list">
-            <div class="info-row"><span class="ir-label">Airlines</span><span class="ir-value">Safarilink · AirKenya · Fly540</span></div>
-            <div class="info-row"><span class="ir-label">From Nairobi</span><span class="ir-value">~1 hr flight</span></div>
-            <div class="info-row"><span class="ir-label">To Watamu</span><span class="ir-value">~30 min · Uber / taxi ~KSh 1,500–2,500</span></div>
-          </div>
-          <a href="https://maps.google.com/?q=Malindi+Airport+Kenya" target="_blank" class="map-link-btn">📍 Open in Google Maps</a>
-        </div>
-      </div>
-
-    </div>
+    <div class="page-content" id="route-content"></div>
     <div class="cta-bar">
       <button class="cta-btn-ghost" onclick="goStep(2)">← Back</button>
       <a href="accommodation.html" class="cta-btn">View Accommodation →</a>
@@ -259,7 +196,6 @@
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
     <span id="music-label">🔇</span>
   </button>
-  <audio id="bg-audio" loop><source src="assets/audio/waves.mp3" type="audio/mpeg"></audio>
 
   <script src="js/state.js"></script>
   <script>
@@ -279,7 +215,92 @@
       currentStep = n;
       updateStepIndicator(n);
       window.scrollTo(0, 0);
-      if (n === 3) buildMaps();
+      if (n === 3) buildRoute();
+    }
+
+    function buildRoute() {
+      const tr = getVal('transport', 'bus');
+      const el = document.getElementById('route-content');
+
+      const VILLA = 'Sunrise Villa · Jacaranda Road, Watamu';
+
+      const routeStop = (icon, label, sub, price) => `
+        <div style="display:flex;align-items:flex-start;gap:16px;padding:18px 0">
+          <div style="width:44px;height:44px;border-radius:50%;background:var(--burgundy);color:var(--ivory);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">${icon}</div>
+          <div style="flex:1;padding-top:4px">
+            <div style="font-family:var(--font-serif);font-size:18px;color:var(--charcoal);margin-bottom:2px">${label}</div>
+            ${sub ? `<div style="font-size:12px;color:var(--stone);letter-spacing:1px">${sub}</div>` : ''}
+            ${price ? `<div style="font-size:13px;color:var(--gold);font-weight:500;margin-top:4px">${price}</div>` : ''}
+          </div>
+        </div>`;
+
+      const connector = (label) => `
+        <div style="display:flex;align-items:center;gap:14px;padding:4px 0 4px 20px">
+          <div style="width:4px;height:40px;background:var(--sand);flex-shrink:0;margin-left:18px"></div>
+          <div style="font-size:11px;letter-spacing:2px;color:var(--stone);text-transform:uppercase">${label}</div>
+        </div>`;
+
+      let html = '';
+
+      if (tr === 'bus') {
+        document.getElementById('route-title').textContent = 'Bus Route';
+        html = `
+          <div class="note-box">🚌 Book in advance during high season. Several operators run direct services from Nairobi to Watamu / Malindi.</div>
+          <div style="background:#fff;border:1px solid var(--sand);padding:8px 20px;margin-bottom:28px">
+            ${routeStop('🏙️','Nairobi','Your starting point','')}
+            ${connector('Bus · KSh 1,000–2,500 · ~8–10 hrs')}
+            ${routeStop('🚌','Watamu / Malindi Bus Stage','Modern Coast · Easy Coach · Tahmeed','')}
+            ${connector('Tuk tuk or taxi · KSh 200–500 · ~15 min')}
+            ${routeStop('🏡', VILLA,'Jacaranda Road, Watamu','')}
+          </div>
+          <div class="info-list">
+            <div class="info-row"><span class="ir-label">Price</span><span class="ir-value">KSh 1,000–2,500 one way</span></div>
+            <div class="info-row"><span class="ir-label">Duration</span><span class="ir-value">~8–10 hours from Nairobi</span></div>
+            <div class="info-row"><span class="ir-label">Operators</span><span class="ir-value">Modern Coast · Easy Coach · Tahmeed</span></div>
+            <div class="info-row"><span class="ir-label">Drop-off</span><span class="ir-value">Watamu or Malindi bus stage</span></div>
+            <div class="info-row"><span class="ir-label">To Villa</span><span class="ir-value">Tuk tuk or taxi · KSh 200–500</span></div>
+          </div>`;
+      } else if (tr === 'flight') {
+        document.getElementById('route-title').textContent = 'Flight Route';
+        html = `
+          <div class="note-box">✈️ Quickest way to arrive. Fly into Malindi Airport — closest airport to Watamu, just ~30 minutes away.</div>
+          <div style="background:#fff;border:1px solid var(--sand);padding:8px 20px;margin-bottom:28px">
+            ${routeStop('🏙️','Nairobi','JKIA or Wilson Airport','')}
+            ${connector('Flight · ~1 hour')}
+            ${routeStop('✈️','Malindi Airport (MYD)','Safarilink · AirKenya · Fly540','')}
+            ${connector('Uber / airport taxi · ~30 min')}
+            ${routeStop('🏡', VILLA,'Jacaranda Road, Watamu','')}
+          </div>
+          <div class="info-list">
+            <div class="info-row"><span class="ir-label">One Way</span><span class="ir-value">KSh 10,000–12,000</span></div>
+            <div class="info-row"><span class="ir-label">Return</span><span class="ir-value">KSh 46,400</span></div>
+            <div class="info-row"><span class="ir-label">Duration</span><span class="ir-value">~1 hour flight</span></div>
+            <div class="info-row"><span class="ir-label">Airlines</span><span class="ir-value">Safarilink · AirKenya · Fly540</span></div>
+            <div class="info-row"><span class="ir-label">Airport → Villa</span><span class="ir-value">Uber / taxi · ~30 min · KSh 1,500–2,500</span></div>
+          </div>`;
+      } else {
+        document.getElementById('route-title').textContent = 'SGR Route';
+        html = `
+          <div class="note-box">🚆 A scenic, comfortable journey. Take the Madaraka Express to Mombasa, then connect to Watamu by road.</div>
+          <div style="background:#fff;border:1px solid var(--sand);padding:8px 20px;margin-bottom:28px">
+            ${routeStop('🏙️','Nairobi SGR Terminal','Syokimau','')}
+            ${connector('Madaraka Express · KSh 1,500–12,000 · ~4.5 hrs')}
+            ${routeStop('🚆','Mombasa SGR Terminus','Miritini','')}
+            ${connector('Matatu (Mwembe Tayari) or private taxi · ~2 hrs')}
+            ${routeStop('🌊','Watamu Town','Kilifi County','')}
+            ${connector('Tuk tuk · ~15 min')}
+            ${routeStop('🏡', VILLA,'Jacaranda Road, Watamu','')}
+          </div>
+          <div class="info-list">
+            <div class="info-row"><span class="ir-label">Price</span><span class="ir-value">KSh 1,500–12,000 depending on class</span></div>
+            <div class="info-row"><span class="ir-label">Duration</span><span class="ir-value">~4.5 hrs Nairobi → Mombasa</span></div>
+            <div class="info-row"><span class="ir-label">Mombasa → Watamu</span><span class="ir-value">Matatu · KSh 400–600 · ~2 hrs</span></div>
+            <div class="info-row"><span class="ir-label">Private Transfer</span><span class="ir-value">KSh 4,000–6,000</span></div>
+            <div class="info-row"><span class="ir-label">Book SGR at</span><span class="ir-value">madaraka.krc.co.ke</span></div>
+          </div>`;
+      }
+
+      el.innerHTML = html;
     }
 
     function updateStepIndicator(active) {
@@ -304,108 +325,9 @@
       if (!silent) saveState({ transport: val });
       document.getElementById('tr-next').disabled = false;
     }
-
-    function buildMaps() {
-      const tr = getVal('transport', 'bus');
-      const el = document.getElementById('maps-content');
-
-      const commonPOI = `
-        <div class="section-block">
-          <div class="section-header">
-            <span class="section-icon">📍</span>
-            <div><div class="section-label">Nearby Essentials</div><div class="section-heading">Good to Know</div></div>
-          </div>
-          <div class="map-grid">
-            <div class="map-item">
-              <h4>🏥 Watamu Hospital</h4>
-              <iframe class="map-embed" src="https://maps.google.com/maps?q=Watamu+Health+Center,Kenya&output=embed" loading="lazy" frameborder="0"></iframe>
-            </div>
-            <div class="map-item">
-              <h4>🏦 ATMs & Banks</h4>
-              <iframe class="map-embed" src="https://maps.google.com/maps?q=ATM+Watamu,Kenya&output=embed" loading="lazy" frameborder="0"></iframe>
-            </div>
-            <div class="map-item">
-              <h4>🛒 Supermarkets</h4>
-              <iframe class="map-embed" src="https://maps.google.com/maps?q=supermarket+Watamu,Kenya&output=embed" loading="lazy" frameborder="0"></iframe>
-            </div>
-            <div class="map-item">
-              <h4>💊 Pharmacies</h4>
-              <iframe class="map-embed" src="https://maps.google.com/maps?q=pharmacy+Watamu,Kenya&output=embed" loading="lazy" frameborder="0"></iframe>
-            </div>
-          </div>
-        </div>`;
-
-      if (tr === 'bus') {
-        el.innerHTML = `
-          <div class="note-box">🚌 You're taking the bus — smart choice! Several operators run direct services to Watamu from Nairobi. Book in advance during high season.</div>
-          <div class="section-block">
-            <div class="section-header"><span class="section-icon">🚌</span><div><div class="section-label">Bus Route</div><div class="section-heading">Bus Stop & Pickup</div></div></div>
-            <div class="info-list">
-              <div class="info-row"><span class="ir-label">Operators</span><span class="ir-value">Easy Coach, Modern Coast, Tahmeed</span></div>
-              <div class="info-row"><span class="ir-label">Duration</span><span class="ir-value">~8–10 hours from Nairobi</span></div>
-              <div class="info-row"><span class="ir-label">Drop-off</span><span class="ir-value">Watamu Town / Gede Stage</span></div>
-              <div class="info-row"><span class="ir-label">From Drop-off</span><span class="ir-value">Tuk Tuk or Uber to the villa (~KSh 200–500)</span></div>
-            </div>
-          </div>
-          <div class="section-block">
-            <div class="section-header"><span class="section-icon">🗺️</span><div><div class="section-label">Map</div><div class="section-heading">Watamu Town</div></div></div>
-            <iframe class="map-embed" style="height:350px" src="https://maps.google.com/maps?q=Watamu,Kilifi+County,Kenya&output=embed" loading="lazy" frameborder="0"></iframe>
-          </div>
-          ${commonPOI}`;
-      } else if (tr === 'flight') {
-        el.innerHTML = `
-          <div class="note-box">✈️ Flying is the quickest way to arrive. Fly into Malindi Airport — it's the closest airport to Watamu, just ~30 minutes away.</div>
-          <div class="section-block">
-            <div class="section-header"><span class="section-icon">✈️</span><div><div class="section-label">Flight Info</div><div class="section-heading">Malindi Airport</div></div></div>
-            <div class="info-list">
-              <div class="info-row"><span class="ir-label">Airport</span><span class="ir-value">Malindi Airport (MYD)</span></div>
-              <div class="info-row"><span class="ir-label">Airlines</span><span class="ir-value">Safarilink, AirKenya, Jambojet</span></div>
-              <div class="info-row"><span class="ir-label">Flight time</span><span class="ir-value">~1 hour from Nairobi</span></div>
-              <div class="info-row"><span class="ir-label">Approx. cost</span><span class="ir-value">KSh 8,000 – 15,000 return</span></div>
-              <div class="info-row"><span class="ir-label">From Airport</span><span class="ir-value">Uber / taxi to villa ~KSh 1,500–2,500</span></div>
-            </div>
-          </div>
-          <div class="section-block">
-            <div class="section-header"><span class="section-icon">🗺️</span><div><div class="section-label">Map</div><div class="section-heading">Malindi Airport</div></div></div>
-            <iframe class="map-embed" style="height:350px" src="https://maps.google.com/maps?q=Malindi+Airport,Kenya&output=embed" loading="lazy" frameborder="0"></iframe>
-          </div>
-          ${commonPOI}`;
-      } else {
-        el.innerHTML = `
-          <div class="note-box">🚆 The SGR is a beautiful, scenic journey! Take the train to Mombasa, then connect to Watamu by matatu or private transfer.</div>
-          <div class="section-block">
-            <div class="section-header"><span class="section-icon">🚆</span><div><div class="section-label">SGR Route</div><div class="section-heading">Nairobi → Mombasa → Watamu</div></div></div>
-            <div class="info-list">
-              <div class="info-row"><span class="ir-label">Train</span><span class="ir-value">SGR Madaraka Express</span></div>
-              <div class="info-row"><span class="ir-label">Duration</span><span class="ir-value">~4.5 hours Nairobi → Mombasa</span></div>
-              <div class="info-row"><span class="ir-label">Cost</span><span class="ir-value">~KSh 1,000 (economy) / KSh 3,000 (1st class)</span></div>
-              <div class="info-row"><span class="ir-label">Mombasa → Watamu</span><span class="ir-value">Matatu from Mwembe Tayari (~KSh 400–600)</span></div>
-              <div class="info-row"><span class="ir-label">Or</span><span class="ir-value">Private transfer ~KSh 4,000–6,000</span></div>
-            </div>
-          </div>
-          <div class="section-block">
-            <div class="section-header"><span class="section-icon">🗺️</span><div><div class="section-label">Map</div><div class="section-heading">Mombasa SGR Terminus</div></div></div>
-            <iframe class="map-embed" style="height:350px" src="https://maps.google.com/maps?q=Mombasa+SGR+Terminus,Kenya&output=embed" loading="lazy" frameborder="0"></iframe>
-          </div>
-          ${commonPOI}`;
-      }
-    }
-
-    // Music
-    let playing = false;
-    function toggleMusic() {
-      const audio = document.getElementById('bg-audio');
-      const btn = document.getElementById('music-btn');
-      const label = document.getElementById('music-label');
-      if (playing) {
-        audio.pause(); playing = false;
-        btn.classList.remove('playing'); label.textContent = '🔇';
-      } else {
-        audio.play().then(() => {
-          playing = true; btn.classList.add('playing'); label.textContent = '🔊';
-        }).catch(() => {});
-      }
-    }
   </script>
+  <div id="yt-bg-player" style="position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;top:-999px"></div>
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="js/music.js"></script>
 </body>
 </html>

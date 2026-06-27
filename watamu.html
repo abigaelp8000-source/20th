@@ -4,6 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Watamu Guide — Twenty in Paradise</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <meta name="theme-color" content="#6B1F3A" />
+  <meta property="og:title" content="Twenty in Paradise — Abby's 20th 🌴" />
+  <meta property="og:description" content="You're invited to celebrate Abby's 20th birthday in Watamu and Malindi, July–August 2026." />
+  <meta property="og:image" content="https://raw.githubusercontent.com/abigaelp8000-source/20th/feature/full-website-build/intro/image%201.jpeg" />
+  <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Allura&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
@@ -57,18 +63,6 @@
       <div class="activities-grid" id="activities-grid"></div>
     </div>
 
-    <!-- NIGHTLIFE -->
-    <div class="section-block" id="nightlife">
-      <div class="section-header">
-        <span class="section-icon">🌙</span>
-        <div>
-          <div class="section-label">After Dark</div>
-          <div class="section-heading">Nightlife & Bars</div>
-        </div>
-      </div>
-      <div class="note-box" style="margin-bottom:20px">🌙 Watamu comes alive at night. These are the spots for sundowners, dancing, and late nights out — join whatever you're up for.</div>
-      <div class="venues-grid" id="nightlife-grid"></div>
-    </div>
 
     <!-- Suggest Activity -->
     <div class="suggest-form" style="margin-bottom:48px">
@@ -123,10 +117,9 @@
         </div>
       </div>
       <div class="info-list">
-        <div class="info-row"><span class="ir-label">🛺 Tuk Tuk</span><span class="ir-value">KSh 100–300 short trips · negotiate first</span></div>
-        <div class="info-row"><span class="ir-label">🏍️ Boda Boda</span><span class="ir-value">KSh 50–200 · fastest for solo trips</span></div>
-        <div class="info-row"><span class="ir-label">🚕 Uber/Bolt</span><span class="ir-value">Available · best for groups & night travel</span></div>
-        <div class="info-row"><span class="ir-label">🚐 Matatu</span><span class="ir-value">KSh 30–100 · local routes, budget option</span></div>
+        <div class="info-row"><span class="ir-label">🛺 Tuk Tuk</span><span class="ir-value">KSh 300–600 · negotiate fare first</span></div>
+        <div class="info-row"><span class="ir-label">🏍️ Boda Boda</span><span class="ir-value">KSh 100–300 · quickest for solo trips</span></div>
+        <div class="info-row"><span class="ir-label">🚕 Uber</span><span class="ir-value">Not always available · best for groups & nights out</span></div>
         <div class="info-row"><span class="ir-label">Tip</span><span class="ir-value">Always agree on price before boarding a tuk tuk or boda</span></div>
       </div>
     </div>
@@ -161,7 +154,6 @@
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
     <span id="music-label">🔇</span>
   </button>
-  <audio id="bg-audio" loop><source src="assets/audio/waves.mp3" type="audio/mpeg"></audio>
 
   <script src="js/state.js"></script>
   <script>
@@ -311,39 +303,14 @@
     }
 
     function saveActivities() { /* already saved in real-time */ }
-
-    // Music
-    let playing = false;
-    function toggleMusic() {
-      const audio = document.getElementById('bg-audio');
-      const btn = document.getElementById('music-btn');
-      const label = document.getElementById('music-label');
-      if (playing) { audio.pause(); playing = false; btn.classList.remove('playing'); label.textContent = '🔇'; }
-      else { audio.play().then(() => { playing = true; btn.classList.add('playing'); label.textContent = '🔊'; }).catch(() => {}); }
-    }
-
-    const NIGHTLIFE = [
-      { emoji:'🍹', name:'Lichthaus', type:'Bar & Restaurant · Popular sundowner spot' },
-      { emoji:'🎵', name:'Cocomo', type:'Beach bar · Live music nights' },
-      { emoji:'🌊', name:'Sun Palm Beach Resort', type:'Bar & pool · Night events' },
-      { emoji:'🪨', name:'The Cave', type:'Unique bar experience' },
-      { emoji:'🕺', name:'Watamu Beach Bar', type:'Beach club · Dancing' },
-    ];
-
-    function buildNightlife() {
-      const grid = document.getElementById('nightlife-grid');
-      NIGHTLIFE.forEach(v => {
-        const div = document.createElement('div');
-        div.className = 'venue-card';
-        div.innerHTML = `<div class="venue-emoji">${v.emoji}</div><div class="venue-name">${v.name}</div><div class="venue-type">${v.type}</div>`;
-        grid.appendChild(div);
-      });
     }
 
     buildActivities();
     buildRestaurants();
-    buildNightlife();
     buildPacking();
   </script>
+  <div id="yt-bg-player" style="position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;top:-999px"></div>
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="js/music.js"></script>
 </body>
 </html>

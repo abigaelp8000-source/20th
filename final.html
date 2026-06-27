@@ -4,6 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Playlist & Guestbook — Twenty in Paradise</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <meta name="theme-color" content="#6B1F3A" />
+  <meta property="og:title" content="Twenty in Paradise — Abby's 20th 🌴" />
+  <meta property="og:description" content="You're invited to celebrate Abby's 20th birthday in Watamu and Malindi, July–August 2026." />
+  <meta property="og:image" content="https://raw.githubusercontent.com/abigaelp8000-source/20th/feature/full-website-build/intro/image%201.jpeg" />
+  <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Allura&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
@@ -53,7 +59,24 @@
     <div style="font-size:40px;margin-bottom:12px">🌴</div>
     <h2>You're All Set, Beautiful</h2>
     <p>Paradise is waiting — see you there</p>
+    <div style="margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="dashboard.html" style="padding:12px 28px;border:1px solid rgba(250,248,245,0.4);color:var(--ivory);text-decoration:none;font-family:var(--font-sans);font-size:10px;letter-spacing:3px;text-transform:uppercase;transition:border-color 0.2s" onmouseover="this.style.borderColor='rgba(250,248,245,0.9)'" onmouseout="this.style.borderColor='rgba(250,248,245,0.4)'">← Back to Dashboard</a>
+    </div>
+    <div style="margin-top:20px;font-size:11px;letter-spacing:2px;opacity:0.6" id="final-countdown">Loading countdown...</div>
   </div>
+  <script>
+    (function() {
+      const trip = new Date('2026-07-22T00:00:00');
+      function tick() {
+        const diff = trip - new Date();
+        if (diff <= 0) { document.getElementById('final-countdown').textContent = '🌴 The trip has begun!'; return; }
+        const d = Math.floor(diff / 86400000);
+        document.getElementById('final-countdown').textContent = d + ' days until paradise';
+        setTimeout(tick, 60000);
+      }
+      tick();
+    })();
+  </script>
 
   <!-- TABS -->
   <div class="tab-bar">
@@ -197,7 +220,6 @@
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
     <span id="music-label">🔇</span>
   </button>
-  <audio id="bg-audio" loop><source src="assets/audio/waves.mp3" type="audio/mpeg"></audio>
 
   <script src="js/state.js"></script>
   <script>
@@ -210,9 +232,7 @@
       { q: 'How do I get to Watamu?', a: 'You can fly into Malindi Airport (~1 hr from Nairobi), take the SGR train to Mombasa and connect from there, or book a direct bus. Check the Transport section in Trip Overview for full details and cost estimates.' },
       { q: 'Is there WiFi at the villa?', a: 'Yes — the villa has WiFi. Data speeds on the coast can vary so bringing a local SIM for data backup is recommended.' },
       { q: 'Is it safe?', a: 'Watamu and Malindi are popular, well-established tourist destinations on the Kenyan coast. Standard travel safety applies — keep valuables secure, use recommended transport at night, and stick with the group.' },
-      { q: 'What currency do I need?', a: 'Kenyan Shillings (KSh). Withdraw cash from ATMs in Watamu or Malindi town — avoid airport exchange rates. Mpesa is widely accepted for local payments.' },
       { q: 'What\'s the closest hospital?', a: 'Watamu has a local health centre. Malindi has a larger hospital. For serious emergencies, Mombasa has full hospital facilities (~1.5 hrs from Watamu).' },
-      { q: 'Who is Sonnie?', a: 'Sonnie is our content creator for the trip! She\'ll be documenting moments throughout the birthday experience. Her vlog will be shared in the Gallery section after the trip.' },
       { q: 'What if I have more questions?', a: 'Reach out to Abby directly! All the important updates will also be shared in the group chat closer to the trip.' },
     ];
 
@@ -244,6 +264,11 @@
       event.target.classList.add('active');
     }
 
+    function netlifySubmit(formName, data) {
+      const body = new URLSearchParams({ 'form-name': formName, ...data });
+      fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString() }).catch(() => {});
+    }
+
     function addSong() {
       const name   = document.getElementById('pl-name').value.trim();
       const song   = document.getElementById('pl-song').value.trim();
@@ -253,6 +278,7 @@
       const playlist = getVal('playlist', []);
       playlist.push({ name, song, artist, why, date: new Date().toISOString() });
       saveState({ playlist });
+      netlifySubmit('playlist', { 'guest-name': name, song, artist, why });
       ['pl-name','pl-song','pl-artist','pl-why'].forEach(id => document.getElementById(id).value = '');
       document.getElementById('pl-confirm').style.display = 'block';
       setTimeout(() => { document.getElementById('pl-confirm').style.display = 'none'; }, 4000);
@@ -286,6 +312,7 @@
       const entries = getVal('guestbook', []);
       entries.push({ name, message, date: new Date().toISOString() });
       saveState({ guestbook: entries });
+      netlifySubmit('guestbook', { 'guest-name': name, message });
       document.getElementById('gb-name').value = '';
       document.getElementById('gb-message').value = '';
       document.getElementById('gb-confirm').style.display = 'block';
@@ -316,15 +343,9 @@
       renderPlaylist();
       renderGuestbook();
     });
-
-    let playing = false;
-    function toggleMusic() {
-      const audio = document.getElementById('bg-audio');
-      const btn = document.getElementById('music-btn');
-      const label = document.getElementById('music-label');
-      if (playing) { audio.pause(); playing = false; btn.classList.remove('playing'); label.textContent = '🔇'; }
-      else { audio.play().then(() => { playing = true; btn.classList.add('playing'); label.textContent = '🔊'; }).catch(() => {}); }
-    }
   </script>
+  <div id="yt-bg-player" style="position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;top:-999px"></div>
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="js/music.js"></script>
 </body>
 </html>

@@ -4,6 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Malindi — Twenty in Paradise</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <meta name="theme-color" content="#6B1F3A" />
+  <meta property="og:title" content="Twenty in Paradise — Abby's 20th 🌴" />
+  <meta property="og:description" content="You're invited to celebrate Abby's 20th birthday in Watamu and Malindi, July–August 2026." />
+  <meta property="og:image" content="https://raw.githubusercontent.com/abigaelp8000-source/20th/feature/full-website-build/intro/image%201.jpeg" />
+  <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Allura&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
@@ -167,7 +173,7 @@
     </div>
     <div class="page-content">
       <div class="note-box">
-        🎟️ The Rammor Event is a must-attend experience during our Malindi leg. If you'd like to join, you'll need to purchase a ticket through the official site.
+        🎟️ The Rammor Event is happening during our Malindi leg. If you'd like to join, grab your ticket through the official site below.
       </div>
       <div class="decision-wrap" style="padding:24px 0 64px">
         <p class="decision-q">Will you be joining us at the Rammor Event?</p>
@@ -188,7 +194,6 @@
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
     <span id="music-label">🔇</span>
   </button>
-  <audio id="bg-audio" loop><source src="assets/audio/waves.mp3" type="audio/mpeg"></audio>
 
   <script src="js/state.js"></script>
   <script>
@@ -231,9 +236,10 @@
       saveState({ rammor: yes });
       document.getElementById('rammor-saved').style.display = 'block';
       if (yes) {
-        setTimeout(() => window.open('https://rammor.hustlesasa.shop/', '_blank'), 400);
+        window.open('https://rammor.hustlesasa.shop/', '_blank');
+        setTimeout(() => window.location.href = 'final.html', 800);
       } else {
-        setTimeout(() => window.location.href = 'final.html', 600);
+        setTimeout(() => window.location.href = 'final.html', 500);
       }
     }
 
@@ -305,15 +311,12 @@
 
       // Full experience users already picked Malindi — send straight to guide
       if (dur === 'full') {
-        if (malindi === false) {
-          window.location.href = 'final.html';
-        } else {
-          goStep(1);
-        }
+        // Full experience users: always go straight to guide
+        goStep(1);
         return;
       }
 
-      // Weekend / week: show extension prompt with tailored copy
+      // Weekend / week: always show the decision prompt (even if they answered before)
       const note = document.getElementById('decision-note');
       const q    = document.getElementById('decision-q');
       if (dur === 'weekend') {
@@ -323,18 +326,12 @@
         note.textContent = '🌴 After your week in Watamu, the adventure continues. Would you like to extend to Malindi from 1st–9th August?';
         q.textContent = 'Would you like to extend to Malindi?';
       }
-
-      if (malindi === true) goStep(1);
     });
 
-    let playing = false;
-    function toggleMusic() {
-      const audio = document.getElementById('bg-audio');
-      const btn = document.getElementById('music-btn');
-      const label = document.getElementById('music-label');
-      if (playing) { audio.pause(); playing = false; btn.classList.remove('playing'); label.textContent = '🔇'; }
-      else { audio.play().then(() => { playing = true; btn.classList.add('playing'); label.textContent = '🔊'; }).catch(() => {}); }
     }
   </script>
+  <div id="yt-bg-player" style="position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;top:-999px"></div>
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="js/music.js"></script>
 </body>
 </html>

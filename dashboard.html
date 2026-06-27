@@ -4,6 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard — Twenty in Paradise</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <meta name="theme-color" content="#6B1F3A" />
+  <meta property="og:title" content="Twenty in Paradise — Abby's 20th 🌴" />
+  <meta property="og:description" content="You're invited to celebrate Abby's 20th birthday in Watamu and Malindi, July–August 2026." />
+  <meta property="og:image" content="https://raw.githubusercontent.com/abigaelp8000-source/20th/feature/full-website-build/intro/image%201.jpeg" />
+  <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Allura&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
@@ -40,7 +46,6 @@
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
     <span id="music-label">🔇</span>
   </button>
-  <audio id="bg-audio" loop><source src="assets/audio/waves.mp3" type="audio/mpeg"></audio>
 
   <!-- PROGRESS BAR -->
   <div class="progress-bar-wrap" title="Your experience progress">
@@ -61,7 +66,7 @@
     <div class="dash-hero">
       <div class="palm-bg-dash" aria-hidden="true">🌴</div>
       <p class="dash-eyebrow">Welcome to the Experience</p>
-      <h1 class="dash-title">Hey Beautiful!</h1>
+      <h1 class="dash-title" id="dash-greeting">Hey Beautiful!</h1>
       <p class="dash-script">Paradise is waiting</p>
       <div class="gold-divider"></div>
 
@@ -83,7 +88,13 @@
 
       <p class="dash-sig">Love, Abby 🤍</p>
 
-      <div class="section-divider"><span>✦</span><span>✦</span><span>✦</span></div>
+      <!-- My Choices context bar -->
+      <div id="my-choices-wrap" style="display:none;margin-top:28px">
+        <p style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px">Your Choices</p>
+        <div id="my-choices" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center"></div>
+      </div>
+
+      <div class="section-divider" style="margin-top:36px"><span>✦</span><span>✦</span><span>✦</span></div>
     </div>
 
     <!-- CARDS GRID -->
@@ -119,7 +130,7 @@
         </div>
         <div class="card-text">
           <div class="card-title">Watamu Guide</div>
-          <div class="card-sub">Activities, food & nightlife</div>
+          <div class="card-sub">Activities, food & restaurants</div>
           <div class="card-desc">Everything to do in paradise</div>
         </div>
         <div class="card-arrow">→</div>
@@ -137,25 +148,13 @@
         <div class="card-arrow">→</div>
       </a>
 
-      <a class="dash-card" href="budget.html">
-        <div class="card-icon-wrap">
-          <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-        </div>
-        <div class="card-text">
-          <div class="card-title">Budget Planner</div>
-          <div class="card-sub">Your personalised estimate</div>
-          <div class="card-desc">Interactive cost calculator</div>
-        </div>
-        <div class="card-arrow">→</div>
-      </a>
-
       <a class="dash-card" href="final.html#playlist">
         <div class="card-icon-wrap">
           <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
         </div>
         <div class="card-text">
           <div class="card-title">Shared Playlist</div>
-          <div class="card-sub">Add your songs</div>
+          <div class="card-sub" id="pl-card-sub">Add your songs</div>
           <div class="card-desc">Our trip soundtrack</div>
         </div>
         <div class="card-arrow">→</div>
@@ -167,7 +166,7 @@
         </div>
         <div class="card-text">
           <div class="card-title">Guestbook</div>
-          <div class="card-sub">Leave a message</div>
+          <div class="card-sub" id="gb-card-sub">Leave a message</div>
           <div class="card-desc">Birthday wishes for Abby</div>
         </div>
         <div class="card-arrow">→</div>
@@ -264,5 +263,8 @@
       if ((s.guestbook||[]).length) dots[5].classList.add('done');
     }
   </script>
+  <div id="yt-bg-player" style="position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;top:-999px"></div>
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="js/music.js"></script>
 </body>
 </html>
