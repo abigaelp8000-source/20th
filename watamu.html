@@ -51,7 +51,23 @@
           <div class="section-heading">More Activities</div>
         </div>
       </div>
+      <div class="note-box" style="margin-bottom:18px">
+        ✨ These are options — not obligations. Join whatever you feel comfortable with, skip what you don't. Every activity is completely your choice.
+      </div>
       <div class="activities-grid" id="activities-grid"></div>
+    </div>
+
+    <!-- NIGHTLIFE -->
+    <div class="section-block" id="nightlife">
+      <div class="section-header">
+        <span class="section-icon">🌙</span>
+        <div>
+          <div class="section-label">After Dark</div>
+          <div class="section-heading">Nightlife & Bars</div>
+        </div>
+      </div>
+      <div class="note-box" style="margin-bottom:20px">🌙 Watamu comes alive at night. These are the spots for sundowners, dancing, and late nights out — join whatever you're up for.</div>
+      <div class="venues-grid" id="nightlife-grid"></div>
     </div>
 
     <!-- Suggest Activity -->
@@ -306,8 +322,27 @@
       else { audio.play().then(() => { playing = true; btn.classList.add('playing'); label.textContent = '🔊'; }).catch(() => {}); }
     }
 
+    const NIGHTLIFE = [
+      { emoji:'🍹', name:'Lichthaus', type:'Bar & Restaurant · Popular sundowner spot' },
+      { emoji:'🎵', name:'Cocomo', type:'Beach bar · Live music nights' },
+      { emoji:'🌊', name:'Sun Palm Beach Resort', type:'Bar & pool · Night events' },
+      { emoji:'🪨', name:'The Cave', type:'Unique bar experience' },
+      { emoji:'🕺', name:'Watamu Beach Bar', type:'Beach club · Dancing' },
+    ];
+
+    function buildNightlife() {
+      const grid = document.getElementById('nightlife-grid');
+      NIGHTLIFE.forEach(v => {
+        const div = document.createElement('div');
+        div.className = 'venue-card';
+        div.innerHTML = `<div class="venue-emoji">${v.emoji}</div><div class="venue-name">${v.name}</div><div class="venue-type">${v.type}</div>`;
+        grid.appendChild(div);
+      });
+    }
+
     buildActivities();
     buildRestaurants();
+    buildNightlife();
     buildPacking();
   </script>
 </body>
